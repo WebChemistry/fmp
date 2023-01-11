@@ -1,0 +1,27 @@
+{
+    "name": "webchemistry/fmp",
+    "require": {
+        "php": ">= 8.1",
+        "typertion/php": "^1.0",
+        "nette/utils": "^3.2",
+        "nette/php-generator": "^4.0",
+        "symfony/http-client": "^6.2",
+        "league/csv": "^9.8",
+        "symfony/serializer": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "WebChemistry\\Fmp\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WebChemistry\\FmpGenerator\\": "generator"
+        }
+    },
+    "require-dev": {
+        "nette/tester": "^2.4",
+        "phpstan/phpstan": "^1.9",
+        "nette/di": "^3.1"
+    }
+}
