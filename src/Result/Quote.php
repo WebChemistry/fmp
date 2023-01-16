@@ -144,7 +144,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getVolume(): int|null
 	{
-		$value = ArrayTypeAssert::intOrNull($this->data, 'volume', fn (): string => sprintf('%s of %s', 'volume', $this->getSymbol()));
+		$value = ArrayTypeAssert::integerishOrNull($this->data, 'volume', fn (): string => sprintf('%s of %s', 'volume', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -156,7 +156,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getAverageVolume(): int|null
 	{
-		$value = ArrayTypeAssert::intOrNull($this->data, 'avgVolume', fn (): string => sprintf('%s of %s', 'avgVolume', $this->getSymbol()));
+		$value = ArrayTypeAssert::integerishOrNull($this->data, 'avgVolume', fn (): string => sprintf('%s of %s', 'avgVolume', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -226,7 +226,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getSharesOutstanding(): int|null
 	{
-		$value = ArrayTypeAssert::intOrNull($this->data, 'sharesOutstanding', fn (): string => sprintf('%s of %s', 'sharesOutstanding', $this->getSymbol()));
+		$value = ArrayTypeAssert::integerishOrNull($this->data, 'sharesOutstanding', fn (): string => sprintf('%s of %s', 'sharesOutstanding', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;

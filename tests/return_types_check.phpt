@@ -3,6 +3,7 @@
 use Tester\Assert;
 use WebChemistry\Fmp\FmpClient;
 use WebChemistry\Fmp\Response\ObjectsResponse;
+use WebChemistry\Fmp\Result\FmpResult;
 
 require __DIR__ . '/bootstrap.php';
 
@@ -13,32 +14,17 @@ $responses = [
 	$client->ratiosTtmBulk(),
 	$client->scores(),
 	$client->quotes('NASDAQ'),
+	$client->quotes('NYSE'),
+	$client->quotes('AMEX'),
+	$client->quotes('crypto'),
 ];
 
 foreach ($responses as $response) {
 	if ($response instanceof ObjectsResponse) {
-		$reflection = new ReflectionClass($response->getClassName());
-
-		$methods = [];
-
-		foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-			if ($method->getDeclaringClass()->name !== $reflection->name) {
-				continue;
-			}
-
-			if (str_starts_with($method->name, '__')) {
-				continue;
-			}
-
-			$methods[] = $method;
-		}
-
+		/** @var FmpResult $object */
 		foreach ($response->yieldObjects() as $object) {
-			foreach ($methods as $method) {
-				Assert::$counter++;
-
-				$method->invoke($object);
-			}
+			Assert::$counter++;
+			$object->getParsedData();
 		}
 	}
 }
