@@ -29,13 +29,13 @@ final class Score extends FmpResult implements SymbolResult
 
 	public function getAltmanZScore(): float
 	{
-		return ArrayTypeAssert::floatish($this->data, 'altmanZScore', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'altmanZScore', fn (): string => sprintf('%s of %s', 'altmanZScore', $this->getSymbol()));
 	}
 
 
 	public function getPiotroskiScore(): int
 	{
-		return ArrayTypeAssert::integerish($this->data, 'piotroskiScore', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::integerish($this->data, 'piotroskiScore', fn (): string => sprintf('%s of %s', 'piotroskiScore', $this->getSymbol()));
 	}
 
 
@@ -45,7 +45,7 @@ final class Score extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::floatish($this->data, 'workingCapital', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'workingCapital', fn (): string => sprintf('%s of %s', 'workingCapital', $this->getSymbol()));
 	}
 
 
@@ -55,7 +55,7 @@ final class Score extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::floatish($this->data, 'totalAssets', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'totalAssets', fn (): string => sprintf('%s of %s', 'totalAssets', $this->getSymbol()));
 	}
 
 
@@ -65,7 +65,7 @@ final class Score extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::floatish($this->data, 'retainedEarnings', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'retainedEarnings', fn (): string => sprintf('%s of %s', 'retainedEarnings', $this->getSymbol()));
 	}
 
 
@@ -75,7 +75,7 @@ final class Score extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::floatish($this->data, 'ebit', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'ebit', fn (): string => sprintf('%s of %s', 'ebit', $this->getSymbol()));
 	}
 
 
@@ -85,7 +85,7 @@ final class Score extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::floatish($this->data, 'marketCap', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'marketCap', fn (): string => sprintf('%s of %s', 'marketCap', $this->getSymbol()));
 	}
 
 
@@ -95,7 +95,7 @@ final class Score extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::floatish($this->data, 'totalLiabilities', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'totalLiabilities', fn (): string => sprintf('%s of %s', 'totalLiabilities', $this->getSymbol()));
 	}
 
 
@@ -105,7 +105,7 @@ final class Score extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::floatish($this->data, 'revenue', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::floatish($this->data, 'revenue', fn (): string => sprintf('%s of %s', 'revenue', $this->getSymbol()));
 	}
 
 

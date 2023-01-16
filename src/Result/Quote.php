@@ -48,7 +48,7 @@ final class Quote extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'price', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'price', fn (): string => sprintf('%s of %s', 'price', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -64,7 +64,7 @@ final class Quote extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::stringOrNull($this->data, 'range', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::stringOrNull($this->data, 'range', fn (): string => sprintf('%s of %s', 'range', $this->getSymbol()));
 	}
 
 
@@ -74,7 +74,7 @@ final class Quote extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'yearHigh', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'yearHigh', fn (): string => sprintf('%s of %s', 'yearHigh', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -90,7 +90,7 @@ final class Quote extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'yearLow', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'yearLow', fn (): string => sprintf('%s of %s', 'yearLow', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -102,13 +102,13 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getChange(): int|float|null
 	{
-		return ArrayTypeAssert::intOrFloatOrNull($this->data, 'change', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::intOrFloatOrNull($this->data, 'change', fn (): string => sprintf('%s of %s', 'change', $this->getSymbol()));
 	}
 
 
 	public function getDayHigh(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'dayHigh', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'dayHigh', fn (): string => sprintf('%s of %s', 'dayHigh', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -120,7 +120,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getDayLow(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'dayLow', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'dayLow', fn (): string => sprintf('%s of %s', 'dayLow', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -132,7 +132,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getPreviousClose(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'previousClose', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'previousClose', fn (): string => sprintf('%s of %s', 'previousClose', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -144,7 +144,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getVolume(): int|null
 	{
-		$value = ArrayTypeAssert::intOrNull($this->data, 'volume', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrNull($this->data, 'volume', fn (): string => sprintf('%s of %s', 'volume', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -156,7 +156,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getAverageVolume(): int|null
 	{
-		$value = ArrayTypeAssert::intOrNull($this->data, 'avgVolume', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrNull($this->data, 'avgVolume', fn (): string => sprintf('%s of %s', 'avgVolume', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -168,7 +168,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getPriceAvg50(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'priceAvg50', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'priceAvg50', fn (): string => sprintf('%s of %s', 'priceAvg50', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -180,7 +180,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getPriceAvg200(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'priceAvg200', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'priceAvg200', fn (): string => sprintf('%s of %s', 'priceAvg200', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -192,7 +192,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getOpen(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'open', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'open', fn (): string => sprintf('%s of %s', 'open', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -204,7 +204,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getName(): string|null
 	{
-		return ArrayTypeAssert::stringOrNull($this->data, 'name', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::stringOrNull($this->data, 'name', fn (): string => sprintf('%s of %s', 'name', $this->getSymbol()));
 	}
 
 
@@ -214,19 +214,19 @@ final class Quote extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::stringOrNull($this->data, 'exchange', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::stringOrNull($this->data, 'exchange', fn (): string => sprintf('%s of %s', 'exchange', $this->getSymbol()));
 	}
 
 
 	public function getPercentageChange(): int|float|null
 	{
-		return ArrayTypeAssert::intOrFloatOrNull($this->data, 'changesPercentage', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::intOrFloatOrNull($this->data, 'changesPercentage', fn (): string => sprintf('%s of %s', 'changesPercentage', $this->getSymbol()));
 	}
 
 
 	public function getSharesOutstanding(): int|null
 	{
-		$value = ArrayTypeAssert::intOrNull($this->data, 'sharesOutstanding', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrNull($this->data, 'sharesOutstanding', fn (): string => sprintf('%s of %s', 'sharesOutstanding', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -238,13 +238,13 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getTimestamp(): int|null
 	{
-		return ArrayTypeAssert::intOrNull($this->data, 'timestamp', fn (): string => $this->getSymbol());
+		return ArrayTypeAssert::intOrNull($this->data, 'timestamp', fn (): string => sprintf('%s of %s', 'timestamp', $this->getSymbol()));
 	}
 
 
 	public function getMarketCapitalization(): int|null
 	{
-		$value = ArrayTypeAssert::integerishOrNull($this->data, 'marketCap', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::integerishOrNull($this->data, 'marketCap', fn (): string => sprintf('%s of %s', 'marketCap', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -256,7 +256,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getEarningsAnnouncement(): DateTime|null
 	{
-		$value = ArrayTypeAssert::stringOrNull($this->data, 'earningsAnnouncement', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::stringOrNull($this->data, 'earningsAnnouncement', fn (): string => sprintf('%s of %s', 'earningsAnnouncement', $this->getSymbol()));
 
 		$value = $this->dateTime($value);
 
@@ -266,7 +266,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getEps(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'eps', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'eps', fn (): string => sprintf('%s of %s', 'eps', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
@@ -278,7 +278,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getPe(): int|float|null
 	{
-		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'pe', fn (): string => $this->getSymbol());
+		$value = ArrayTypeAssert::intOrFloatOrNull($this->data, 'pe', fn (): string => sprintf('%s of %s', 'pe', $this->getSymbol()));
 
 		if ($this->isZero($value)) {
 			return null;
