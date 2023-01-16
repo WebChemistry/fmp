@@ -121,7 +121,7 @@ final class Generator
 			$earlyReturn ? 'return' : '$value =',
 			'ArrayTypeAssert',
 			$assertMethod,
-			$messageWithSymbol ? ', fn () => sprintf(\'%s of %s\', \'' . $property->name . '\', $this->getSymbol())' : '',
+			$messageWithSymbol ? ', fn (): string => $this->getSymbol()' : '',
 		), [
 			$property->name,
 		]);

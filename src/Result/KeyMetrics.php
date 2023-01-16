@@ -80,7 +80,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getRevenuePerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'revenuePerShareTTM', fn () => sprintf('%s of %s', 'revenuePerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'revenuePerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -92,7 +92,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getNetIncomePerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'netIncomePerShareTTM', fn () => sprintf('%s of %s', 'netIncomePerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'netIncomePerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -104,7 +104,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getOperatingCashFlowPerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'operatingCashFlowPerShareTTM', fn () => sprintf('%s of %s', 'operatingCashFlowPerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'operatingCashFlowPerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -116,7 +116,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getFreeCashFlowPerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'freeCashFlowPerShareTTM', fn () => sprintf('%s of %s', 'freeCashFlowPerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'freeCashFlowPerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -128,7 +128,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getCashPerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'cashPerShareTTM', fn () => sprintf('%s of %s', 'cashPerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'cashPerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -140,7 +140,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getBookValuePerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'bookValuePerShareTTM', fn () => sprintf('%s of %s', 'bookValuePerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'bookValuePerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -152,7 +152,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getTangibleBookValuePerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'tangibleBookValuePerShareTTM', fn () => sprintf('%s of %s', 'tangibleBookValuePerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'tangibleBookValuePerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -164,7 +164,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getShareholdersEquityPerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'shareholdersEquityPerShareTTM', fn () => sprintf('%s of %s', 'shareholdersEquityPerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'shareholdersEquityPerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -176,7 +176,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getInterestDebtPerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'interestDebtPerShareTTM', fn () => sprintf('%s of %s', 'interestDebtPerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'interestDebtPerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -188,7 +188,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getMarketCap(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'marketCapTTM', fn () => sprintf('%s of %s', 'marketCapTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'marketCapTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -200,7 +200,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getEnterpriseValue(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'enterpriseValueTTM', fn () => sprintf('%s of %s', 'enterpriseValueTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'enterpriseValueTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -212,7 +212,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPeRatio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'peRatioTTM', fn () => sprintf('%s of %s', 'peRatioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'peRatioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -224,7 +224,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPriceToSalesRatio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'priceToSalesRatioTTM', fn () => sprintf('%s of %s', 'priceToSalesRatioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'priceToSalesRatioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -236,7 +236,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPocfratio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'pocfratioTTM', fn () => sprintf('%s of %s', 'pocfratioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'pocfratioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -248,7 +248,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPfcfRatio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'pfcfRatioTTM', fn () => sprintf('%s of %s', 'pfcfRatioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'pfcfRatioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -260,7 +260,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPbRatio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'pbRatioTTM', fn () => sprintf('%s of %s', 'pbRatioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'pbRatioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -272,7 +272,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPtbRatio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'ptbRatioTTM', fn () => sprintf('%s of %s', 'ptbRatioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'ptbRatioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -284,7 +284,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getEvToSales(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'evToSalesTTM', fn () => sprintf('%s of %s', 'evToSalesTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'evToSalesTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -296,7 +296,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getEnterpriseValueOverEBITDA(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'enterpriseValueOverEBITDATTM', fn () => sprintf('%s of %s', 'enterpriseValueOverEBITDATTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'enterpriseValueOverEBITDATTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -308,7 +308,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getEvToOperatingCashFlow(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'evToOperatingCashFlowTTM', fn () => sprintf('%s of %s', 'evToOperatingCashFlowTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'evToOperatingCashFlowTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -320,7 +320,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getEvToFreeCashFlow(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'evToFreeCashFlowTTM', fn () => sprintf('%s of %s', 'evToFreeCashFlowTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'evToFreeCashFlowTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -332,7 +332,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getEarningsYield(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'earningsYieldTTM', fn () => sprintf('%s of %s', 'earningsYieldTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'earningsYieldTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -344,7 +344,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getFreeCashFlowYield(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'freeCashFlowYieldTTM', fn () => sprintf('%s of %s', 'freeCashFlowYieldTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'freeCashFlowYieldTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -356,7 +356,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDebtToEquity(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'debtToEquityTTM', fn () => sprintf('%s of %s', 'debtToEquityTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'debtToEquityTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -368,7 +368,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDebtToAssets(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'debtToAssetsTTM', fn () => sprintf('%s of %s', 'debtToAssetsTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'debtToAssetsTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -380,7 +380,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getNetDebtToEBITDA(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'netDebtToEBITDATTM', fn () => sprintf('%s of %s', 'netDebtToEBITDATTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'netDebtToEBITDATTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -392,7 +392,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getCurrentRatio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'currentRatioTTM', fn () => sprintf('%s of %s', 'currentRatioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'currentRatioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -404,7 +404,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getInterestCoverage(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'interestCoverageTTM', fn () => sprintf('%s of %s', 'interestCoverageTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'interestCoverageTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -416,7 +416,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getIncomeQuality(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'incomeQualityTTM', fn () => sprintf('%s of %s', 'incomeQualityTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'incomeQualityTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -428,7 +428,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDividendYield(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'dividendYieldTTM', fn () => sprintf('%s of %s', 'dividendYieldTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'dividendYieldTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -440,7 +440,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDividendYieldPercentage(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'dividendYieldPercentageTTM', fn () => sprintf('%s of %s', 'dividendYieldPercentageTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'dividendYieldPercentageTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -452,7 +452,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPayoutRatio(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'payoutRatioTTM', fn () => sprintf('%s of %s', 'payoutRatioTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'payoutRatioTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -464,7 +464,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getSalesGeneralAndAdministrativeToRevenue(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'salesGeneralAndAdministrativeToRevenueTTM', fn () => sprintf('%s of %s', 'salesGeneralAndAdministrativeToRevenueTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'salesGeneralAndAdministrativeToRevenueTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -476,7 +476,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getResearchAndDevelopementToRevenue(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'researchAndDevelopementToRevenueTTM', fn () => sprintf('%s of %s', 'researchAndDevelopementToRevenueTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'researchAndDevelopementToRevenueTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -488,7 +488,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getIntangiblesToTotalAssets(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'intangiblesToTotalAssetsTTM', fn () => sprintf('%s of %s', 'intangiblesToTotalAssetsTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'intangiblesToTotalAssetsTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -500,7 +500,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getCapexToOperatingCashFlow(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'capexToOperatingCashFlowTTM', fn () => sprintf('%s of %s', 'capexToOperatingCashFlowTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'capexToOperatingCashFlowTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -512,7 +512,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getCapexToRevenue(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'capexToRevenueTTM', fn () => sprintf('%s of %s', 'capexToRevenueTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'capexToRevenueTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -524,7 +524,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getCapexToDepreciation(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'capexToDepreciationTTM', fn () => sprintf('%s of %s', 'capexToDepreciationTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'capexToDepreciationTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -536,7 +536,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getStockBasedCompensationToRevenue(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'stockBasedCompensationToRevenueTTM', fn () => sprintf('%s of %s', 'stockBasedCompensationToRevenueTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'stockBasedCompensationToRevenueTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -548,7 +548,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getGrahamNumber(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'grahamNumberTTM', fn () => sprintf('%s of %s', 'grahamNumberTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'grahamNumberTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -560,7 +560,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getRoic(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'roicTTM', fn () => sprintf('%s of %s', 'roicTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'roicTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -572,7 +572,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getReturnOnTangibleAssets(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'returnOnTangibleAssetsTTM', fn () => sprintf('%s of %s', 'returnOnTangibleAssetsTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'returnOnTangibleAssetsTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -584,7 +584,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getGrahamNetNet(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'grahamNetNetTTM', fn () => sprintf('%s of %s', 'grahamNetNetTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'grahamNetNetTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -596,7 +596,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getWorkingCapital(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'workingCapitalTTM', fn () => sprintf('%s of %s', 'workingCapitalTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'workingCapitalTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -608,7 +608,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getTangibleAssetValue(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'tangibleAssetValueTTM', fn () => sprintf('%s of %s', 'tangibleAssetValueTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'tangibleAssetValueTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -620,7 +620,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getNetCurrentAssetValue(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'netCurrentAssetValueTTM', fn () => sprintf('%s of %s', 'netCurrentAssetValueTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'netCurrentAssetValueTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -632,7 +632,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getInvestedCapital(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'investedCapitalTTM', fn () => sprintf('%s of %s', 'investedCapitalTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'investedCapitalTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -644,7 +644,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getAverageReceivables(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'averageReceivablesTTM', fn () => sprintf('%s of %s', 'averageReceivablesTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'averageReceivablesTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -656,7 +656,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getAveragePayables(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'averagePayablesTTM', fn () => sprintf('%s of %s', 'averagePayablesTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'averagePayablesTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -668,7 +668,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getAverageInventory(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'averageInventoryTTM', fn () => sprintf('%s of %s', 'averageInventoryTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'averageInventoryTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -680,7 +680,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDaysSalesOutstanding(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'daysSalesOutstandingTTM', fn () => sprintf('%s of %s', 'daysSalesOutstandingTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'daysSalesOutstandingTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -692,7 +692,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDaysPayablesOutstanding(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'daysPayablesOutstandingTTM', fn () => sprintf('%s of %s', 'daysPayablesOutstandingTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'daysPayablesOutstandingTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -704,7 +704,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDaysOfInventoryOnHand(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'daysOfInventoryOnHandTTM', fn () => sprintf('%s of %s', 'daysOfInventoryOnHandTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'daysOfInventoryOnHandTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -716,7 +716,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getReceivablesTurnover(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'receivablesTurnoverTTM', fn () => sprintf('%s of %s', 'receivablesTurnoverTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'receivablesTurnoverTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -728,7 +728,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getPayablesTurnover(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'payablesTurnoverTTM', fn () => sprintf('%s of %s', 'payablesTurnoverTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'payablesTurnoverTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -740,7 +740,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getInventoryTurnover(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'inventoryTurnoverTTM', fn () => sprintf('%s of %s', 'inventoryTurnoverTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'inventoryTurnoverTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -752,7 +752,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getRoe(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'roeTTM', fn () => sprintf('%s of %s', 'roeTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'roeTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -764,7 +764,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getCapexPerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'capexPerShareTTM', fn () => sprintf('%s of %s', 'capexPerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'capexPerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -776,7 +776,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDividendPerShare(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'dividendPerShareTTM', fn () => sprintf('%s of %s', 'dividendPerShareTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'dividendPerShareTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
@@ -788,7 +788,7 @@ final class KeyMetrics extends FmpResult implements SymbolResult
 
 	public function getDebtToMarketCap(): float|null
 	{
-		$value = ArrayTypeAssert::floatish($this->data, 'debtToMarketCapTTM', fn () => sprintf('%s of %s', 'debtToMarketCapTTM', $this->getSymbol()));
+		$value = ArrayTypeAssert::floatish($this->data, 'debtToMarketCapTTM', fn (): string => $this->getSymbol());
 
 		if ($this->isZero($value)) {
 			return null;
