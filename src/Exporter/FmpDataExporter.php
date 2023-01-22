@@ -13,7 +13,8 @@ final class FmpDataExporter
 {
 
 	/**
-	 * @param ChildrenResponse<FmpResult> $response
+	 * @template T of FmpResult
+	 * @param ChildrenResponse<T> $response
 	 * @param string[] $mapping
 	 * @param string[] $symbols
 	 * @return list<mixed[]>
