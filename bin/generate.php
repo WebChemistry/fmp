@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 use Typertion\Php\ArrayTypeAssert;
+use WebChemistry\Fmp\Result\HistoricalLine;
 use WebChemistry\FmpGenerator\Configuration;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -199,11 +200,23 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('isTheStockMarketOpen', 'bool', ArrayTypeAssert::bool(...))
 		->addProperty('isTheEuronextMarketOpen', 'bool', ArrayTypeAssert::bool(...))
 		->addProperty('isTheForexMarketOpen', 'bool', ArrayTypeAssert::bool(...))
-		->addProperty('isTheCryptoMarketOpen', 'bool', ArrayTypeAssert::bool(...))
-	,
+		->addProperty('isTheCryptoMarketOpen', 'bool', ArrayTypeAssert::bool(...)),
 ]);
 
 $generator->generate();
+
+function convertToArray(string $className): string
+{
+	return implode("\n", [
+		'$array = [];',
+		'',
+		'foreach ($value as $item) {',
+		"\t" . sprintf('$array[] = new %s($item);', $className),
+		'}',
+		'',
+		'$value = $array;',
+	]);
+}
 
 /**
  * @param string[] $holidays

@@ -19,6 +19,8 @@ use WebChemistry\Fmp\Response\ObjectResponse;
 use WebChemistry\Fmp\Response\ObjectsResponse;
 use WebChemistry\Fmp\Response\Response;
 use WebChemistry\Fmp\Result\FmpResult;
+use WebChemistry\Fmp\Result\HistoricalPriceFull;
+use WebChemistry\Fmp\Result\HistoricalPriceFullLine;
 use WebChemistry\Fmp\Result\KeyMetrics;
 use WebChemistry\Fmp\Result\MarketOpen;
 use WebChemistry\Fmp\Result\Quote;
@@ -57,6 +59,14 @@ final class FmpClient
 		$this->decoder->setDecoder($decoder, $contentTypes, $default);
 
 		return $this;
+	}
+
+	/**
+	 * @return ChildResponse<HistoricalPriceFullLine>
+	 */
+	public function historicalPriceFullLine(string $symbol): ChildResponse
+	{
+		return $this->requestObject(HistoricalPriceFullLine::class, $this->createV3(['historical-price-full', $symbol], ['serietype' => 'line']));
 	}
 
 	/**
