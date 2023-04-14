@@ -29,6 +29,7 @@ final class MarketOpen extends FmpResult
 	 */
 	public function getStockMarketHours(): array
 	{
+		/** @var array{ openingHour: string, closingHour: string } */
 		return ArrayTypeAssert::array($this->data, 'stockMarketHours');
 	}
 
@@ -38,6 +39,7 @@ final class MarketOpen extends FmpResult
 	 */
 	public function getStockMarketHolidays(): array
 	{
+		/** @var array{ year: int, "New Years Day": string|null, "Martin Luther King, Jr. Day": string|null, "Washington\'s Birthday": string|null, "Good Friday": string|null, "Juneteenth National Independence Day": string|null, "Independence Day": string|null, "Labor Day": string|null, "Thanksgiving Day": string|null, "Christmas": string|null}[] */
 		return ArrayTypeAssert::array($this->data, 'stockMarketHolidays');
 	}
 
