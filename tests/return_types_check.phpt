@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 use Tester\Assert;
+use Typertion\Php\Exception\AssertionFailedException;
 use WebChemistry\Fmp\FmpClient;
 use WebChemistry\Fmp\Response\ObjectsResponse;
 use WebChemistry\Fmp\Result\FmpResult;
@@ -24,7 +25,12 @@ foreach ($responses as $response) {
 		/** @var FmpResult $object */
 		foreach ($response->yieldObjects() as $object) {
 			Assert::$counter++;
-			$object->getParsedData();
+
+			try {
+				$object->getParsedData();
+			} catch (AssertionFailedException $exception) {
+				Assert::fail($exception->getMessage());
+			}
 		}
 	}
 }
