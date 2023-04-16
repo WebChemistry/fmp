@@ -70,6 +70,23 @@ final class FmpClient
 	}
 
 	/**
+	 * @param string[] $symbols
+	 * @return ChildrenResponse<HistoricalPriceFullLine>
+	 */
+	public function historicalPricesFullLine(array $symbols): ChildrenResponse
+	{
+		if (count($symbols) > 3) {
+			throw new InvalidArgumentException('Symbols have to be less than 3');
+		}
+
+		return $this->requestObjects(
+			HistoricalPriceFullLine::class,
+			$this->createV3(['historical-price-full', implode(',', $symbols)], ['serietype' => 'line']),
+			fn (array $result) => $result['historicalStockList'],
+		);
+	}
+
+	/**
 	 * @return ChildResponse<MarketOpen>
 	 */
 	public function isMarketOpen(): ChildResponse
