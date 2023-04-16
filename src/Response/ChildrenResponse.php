@@ -5,6 +5,7 @@ namespace WebChemistry\Fmp\Response;
 use Countable;
 use Generator;
 use IteratorAggregate;
+use OutOfBoundsException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -43,6 +44,12 @@ interface ChildrenResponse extends Countable, IteratorAggregate, ResponseInterfa
 	public function yieldObjects(bool $throw = true): Generator;
 
 	public function hasSymbol(string $symbol): bool;
+
+	/**
+	 * @throws OutOfBoundsException
+	 * @return T
+	 */
+	public function getSymbol(string $symbol): FmpResult;
 
 	/**
 	 * @return ArrayIndex<T>

@@ -4,6 +4,7 @@ namespace WebChemistry\Fmp\Response;
 
 use DomainException;
 use Generator;
+use OutOfBoundsException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -25,8 +26,8 @@ class ObjectsResponse extends Response implements ChildrenResponse
 	/** @use SymbolObjectsResponse<T> */
 	use SymbolObjectsResponse;
 
-	/** @var array<string, true> */
-	private array $search;
+	/** @var array<string, T> */
+	private array $indexed;
 
 	/** @var T[] */
 	private array $objects;
@@ -98,24 +99,40 @@ class ObjectsResponse extends Response implements ChildrenResponse
 
 	public function hasSymbol(string $symbol): bool
 	{
-		if (!isset($this->search)) {
-			$this->search = [];
+		return isset($this->getIndexed()[$this->normalizeSymbol($symbol)]);
+	}
+
+	/**
+	 * @return T
+	 */
+	public function getSymbol(string $symbol): FmpResult
+	{
+		return $this->getIndexed()[$this->normalizeSymbol($symbol)] ?? throw new OutOfBoundsException(sprintf('Symbol "%s" not found.', $symbol));
+	}
+
+	/**
+	 * @return array<string, T>
+	 */
+	private function getIndexed(): array
+	{
+		if (!isset($this->indexed)) {
+			$this->indexed = [];
 
 			foreach ($this->toObjects() as $object) {
 				if (!$object instanceof SymbolResult) {
 					throw new DomainException(
 						sprintf(
-							'Method hasSymbol can be used only with result implements %s interface.',
+							'Indexed array can be used only with result implements %s interface.',
 							SymbolResult::class
 						)
 					);
 				}
 
-				$this->search[$this->normalizeSymbol($object->getSymbol())] = true;
+				$this->indexed[$this->normalizeSymbol($object->getSymbol())] = $object;
 			}
 		}
 
-		return isset($this->search[$this->normalizeSymbol($symbol)]);
+		return $this->indexed;
 	}
 
 	/**

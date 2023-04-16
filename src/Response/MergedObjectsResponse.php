@@ -5,6 +5,7 @@ namespace WebChemistry\Fmp\Response;
 use Generator;
 use LogicException;
 use Nette\Utils\Arrays;
+use OutOfBoundsException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -79,6 +80,20 @@ final class MergedObjectsResponse implements ChildrenResponse
 			$this->responses,
 			fn (ChildrenResponse $response): bool => $response->hasSymbol($symbol),
 		);
+	}
+
+	/**
+	 * @return T
+	 */
+	public function getSymbol(string $symbol): FmpResult
+	{
+		foreach ($this->responses as $response) {
+			if ($response->hasSymbol($symbol)) {
+				return $response->getSymbol($symbol);
+			}
+		}
+
+		throw new OutOfBoundsException(sprintf('Symbol "%s" not found.', $symbol));
 	}
 
 	/**
