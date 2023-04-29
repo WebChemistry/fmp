@@ -23,25 +23,25 @@ final class HistoricalChartItem extends FmpResult
 
 	public function getOpen(): float
 	{
-		return ArrayTypeAssert::float($this->data, 'open');
+		return ArrayTypeAssert::floatish($this->data, 'open');
 	}
 
 
 	public function getLow(): float
 	{
-		return ArrayTypeAssert::float($this->data, 'low');
+		return ArrayTypeAssert::floatish($this->data, 'low');
 	}
 
 
 	public function getHigh(): float
 	{
-		return ArrayTypeAssert::float($this->data, 'high');
+		return ArrayTypeAssert::floatish($this->data, 'high');
 	}
 
 
 	public function getClose(): float
 	{
-		return ArrayTypeAssert::float($this->data, 'close');
+		return ArrayTypeAssert::floatish($this->data, 'close');
 	}
 
 

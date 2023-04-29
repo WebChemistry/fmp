@@ -202,10 +202,10 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('isTheCryptoMarketOpen', 'bool', ArrayTypeAssert::bool(...)),
 	(new Configuration('HistoricalChartItem', uses: [DateTime::class]))
 		->addProperty('date', ...dateTimeField())
-		->addProperty('open', 'float', ArrayTypeAssert::float(...))
-		->addProperty('low', 'float', ArrayTypeAssert::float(...))
-		->addProperty('high', 'float', ArrayTypeAssert::float(...))
-		->addProperty('close', 'float', ArrayTypeAssert::float(...))
+		->addProperty('open', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('low', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('high', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('close', 'float', ArrayTypeAssert::floatish(...))
 		->addProperty('volume', 'int', ArrayTypeAssert::int(...)),
 ]);
 
