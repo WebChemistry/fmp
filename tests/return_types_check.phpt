@@ -21,6 +21,7 @@ $responses = [
 ];
 
 foreach ($responses as $response) {
+	Assert::true($response instanceof ObjectsResponse);
 	if ($response instanceof ObjectsResponse) {
 		/** @var FmpResult $object */
 		foreach ($response->yieldObjects() as $object) {

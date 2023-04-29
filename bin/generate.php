@@ -40,7 +40,7 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('sharesOutstanding', 'int|null', ArrayTypeAssert::integerishOrNull(...), zeroIsNull: true)
 		->addProperty('timestamp', 'int|null', ArrayTypeAssert::intOrNull(...))
 		->addProperty('marketCap', 'int|null', ArrayTypeAssert::integerishOrNull(...), zeroIsNull: true, fieldName: 'marketCapitalization')
-		->addProperty('earningsAnnouncement', 'DateTime|null', ArrayTypeAssert::stringOrNull(...), converter: '$value = $this->dateTime($value);')
+		->addProperty('earningsAnnouncement', ...dateTimeField(true))
 		->addProperty('eps', 'int|float|null', ArrayTypeAssert::intOrFloatOrNull(...), zeroIsNull: true)
 		->addProperty('pe', 'int|float|null', ArrayTypeAssert::intOrFloatOrNull(...), zeroIsNull: true)
 		->addCustomProperty('datetime', 'DateTime|null', [
@@ -200,9 +200,25 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('isTheEuronextMarketOpen', 'bool', ArrayTypeAssert::bool(...))
 		->addProperty('isTheForexMarketOpen', 'bool', ArrayTypeAssert::bool(...))
 		->addProperty('isTheCryptoMarketOpen', 'bool', ArrayTypeAssert::bool(...)),
+	(new Configuration('HistoricalChartItem', uses: [DateTime::class]))
+		->addProperty('date', ...dateTimeField())
+		->addProperty('open', 'float', ArrayTypeAssert::float(...))
+		->addProperty('low', 'float', ArrayTypeAssert::float(...))
+		->addProperty('high', 'float', ArrayTypeAssert::float(...))
+		->addProperty('close', 'float', ArrayTypeAssert::float(...))
+		->addProperty('volume', 'int', ArrayTypeAssert::int(...)),
 ]);
 
 $generator->generate();
+
+function dateTimeField(bool $nullable = false): array
+{
+	return [
+		'DateTime' . ($nullable ? '|null' : ''),
+		$nullable ? ArrayTypeAssert::stringOrNull(...) : ArrayTypeAssert::string(...),
+		'converter' => '$value = $this->dateTime($value);',
+	];
+}
 
 function convertToArray(string $className): string
 {

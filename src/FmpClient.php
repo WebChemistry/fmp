@@ -19,6 +19,7 @@ use WebChemistry\Fmp\Response\ObjectResponse;
 use WebChemistry\Fmp\Response\ObjectsResponse;
 use WebChemistry\Fmp\Response\Response;
 use WebChemistry\Fmp\Result\FmpResult;
+use WebChemistry\Fmp\Result\HistoricalChart;
 use WebChemistry\Fmp\Result\HistoricalPriceFull;
 use WebChemistry\Fmp\Result\HistoricalPriceFullLine;
 use WebChemistry\Fmp\Result\KeyMetrics;
@@ -67,6 +68,14 @@ final class FmpClient
 	public function historicalPriceFullLine(string $symbol): ChildResponse
 	{
 		return $this->requestObject(HistoricalPriceFullLine::class, $this->createV3(['historical-price-full', $symbol], ['serietype' => 'line']));
+	}
+
+	/**
+	 * @return ChildResponse<HistoricalChart>
+	 */
+	public function historicalChart(string $symbol, string $interval = '1min'): ChildResponse
+	{
+		return $this->requestObject(HistoricalChart::class, $this->createV3(['historical-chart', $interval, $symbol]));
 	}
 
 	/**
