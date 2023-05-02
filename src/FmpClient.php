@@ -19,11 +19,13 @@ use WebChemistry\Fmp\Response\ObjectResponse;
 use WebChemistry\Fmp\Response\ObjectsResponse;
 use WebChemistry\Fmp\Response\Response;
 use WebChemistry\Fmp\Result\FmpResult;
+use WebChemistry\Fmp\Result\GradeConsensus;
 use WebChemistry\Fmp\Result\HistoricalChart;
 use WebChemistry\Fmp\Result\HistoricalPriceFull;
 use WebChemistry\Fmp\Result\HistoricalPriceFullLine;
 use WebChemistry\Fmp\Result\KeyMetrics;
 use WebChemistry\Fmp\Result\MarketOpen;
+use WebChemistry\Fmp\Result\PriceTarget;
 use WebChemistry\Fmp\Result\Quote;
 use WebChemistry\Fmp\Result\Ratios;
 use WebChemistry\Fmp\Result\Score;
@@ -133,6 +135,22 @@ final class FmpClient
 	public function scores(): ChildrenResponse
 	{
 		return $this->requestObjects(Score::class, $this->createV4('scores-bulk'));
+	}
+
+	/**
+	 * @return ChildrenResponse<PriceTarget>
+	 */
+	public function priceTargetsBulk(): ChildrenResponse
+	{
+		return $this->requestObjects(PriceTarget::class, $this->createV4('price-target-summary-bulk'));
+	}
+
+	/**
+	 * @return ChildrenResponse<GradeConsensus>
+	 */
+	public function gradeConsensusBulk(): ChildrenResponse
+	{
+		return $this->requestObjects(GradeConsensus::class, $this->createV4('upgrades-downgrades-consensus-bulk'));
 	}
 
 	/**

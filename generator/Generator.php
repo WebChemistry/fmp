@@ -89,8 +89,8 @@ final class Generator
 		$method = $class->addMethod(sprintf('get%s', ucfirst($property->fieldName)))
 			->setReturnType($property->type);
 
-		if ($property->commentType) {
-			$method->addComment(sprintf('@return %s', $property->commentType));
+		if ($property->commentType?->isInMethod()) {
+			$method->addComment(sprintf('@return %s', $property->commentType->getType()));
 		}
 
 		if ($property->mayNotExist) {
@@ -112,8 +112,8 @@ final class Generator
 			$method->addBody('');
 		}
 
-		if ($property->commentType) {
-			$method->addBody(sprintf('/** @var %s%s */', $earlyReturn ? '' : ' $value', $property->commentType));
+		if ($property->commentType?->isInVariable()) {
+			$method->addBody(sprintf('/** @var %s%s */', $earlyReturn ? '' : '$value ', $property->commentType->getType()));
 		}
 
 		$method->addBody(sprintf(

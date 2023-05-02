@@ -29,7 +29,7 @@ final class Configuration
 		bool $zeroIsNull = false,
 		bool $emptyIsNull = false,
 		?string $fieldName = null,
-		?string $commentType = null,
+		string|CommentType|null $commentType = null,
 		?string $converter = null,
 	): self
 	{
@@ -53,7 +53,7 @@ final class Configuration
 			$mayNotExist,
 			$zeroIsNull,
 			$emptyIsNull,
-			$commentType,
+			is_string($commentType) ? new CommentType($commentType, CommentTypeLocation::VariableMethod) : $commentType,
 			$converter,
 		);
 

@@ -1,7 +1,11 @@
 <?php declare(strict_types = 1);
 
+use Nette\Utils\Json;
 use Typertion\Php\ArrayTypeAssert;
+use WebChemistry\Fmp\Result\Grade;
 use WebChemistry\Fmp\Result\HistoricalLine;
+use WebChemistry\FmpGenerator\CommentType;
+use WebChemistry\FmpGenerator\CommentTypeLocation;
 use WebChemistry\FmpGenerator\Configuration;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -207,9 +211,38 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('high', 'float', ArrayTypeAssert::floatish(...))
 		->addProperty('close', 'float', ArrayTypeAssert::floatish(...))
 		->addProperty('volume', 'int', ArrayTypeAssert::int(...)),
+	(new Configuration('GradeConsensus', messageWithSymbol: true, containsSymbol: true, uses: [Grade::class]))
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...))
+		->addProperty('strongBuy', 'int', ArrayTypeAssert::integerish(...))
+		->addProperty('buy', 'int', ArrayTypeAssert::integerish(...))
+		->addProperty('hold', 'int', ArrayTypeAssert::integerish(...))
+		->addProperty('sell', 'int', ArrayTypeAssert::integerish(...))
+		->addProperty('strongSell', 'int', ArrayTypeAssert::integerish(...))
+		->addProperty('consensus', implode('|', [Grade::class, 'null']), ArrayTypeAssert::string(...), emptyIsNull: true, converter: enumConverter('Grade')),
+	(new Configuration('PriceTarget', messageWithSymbol: true, containsSymbol: true))
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...))
+		->addProperty('lastMonth', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastMonthAvgPT', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastMonthAvgPTPercentDif', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastQuarter', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastQuarterAvgPT', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastQuarterAvgPTPercentDif', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastYear', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastYearAvgPT', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('lastYearAvgPTPercentDif', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('allTime', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('allTimeAvgPT', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('allTimeAvgPTPercentDif', 'float', ArrayTypeAssert::floatish(...))
+		->addProperty('publishers', 'array', ArrayTypeAssert::string(...), commentType: new CommentType('array<string>', CommentTypeLocation::Method),
+			converter: '$value = array_map(fn (string $v): string => substr($v, 1, -1), explode(\', \', substr($value, 1, -1)));'),
 ]);
 
 $generator->generate();
+
+function enumConverter(string $enumClass): string
+{
+	return sprintf('$value = %s::from($value);', $enumClass);
+}
 
 function dateTimeField(bool $nullable = false): array
 {

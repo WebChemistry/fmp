@@ -16,7 +16,7 @@ final class Property
 		public readonly bool $mayNotExist = false,
 		public readonly bool $zeroIsNull = false,
 		public readonly bool $emptyIsNull = false,
-		public readonly ?string $commentType = null,
+		public readonly ?CommentType $commentType = null,
 		public readonly ?string $converter = null,
 	)
 	{
