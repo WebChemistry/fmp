@@ -2,9 +2,10 @@
 
 namespace WebChemistry\Fmp;
 
-use App\Ticker\Result\IsMarketOpen;
 use InvalidArgumentException;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\Retry\GenericRetryStrategy;
+use Symfony\Component\HttpClient\RetryableHttpClient;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use Symfony\Component\Serializer\Encoder\JsonDecode;
@@ -52,6 +53,16 @@ final class FmpClient
 			JsonDecode::ASSOCIATIVE => true,
 		]), ['application/json']);
 		$this->decoder->setDecoder(new CsvEncoder(), [], true);
+	}
+
+	public function withRetryStrategy(int $maxRetries = 3, int $delayMs = 1000, float $multiplier = 2.0): self
+	{
+		$clone = clone $this;
+		$clone->client = new RetryableHttpClient($clone->client, new GenericRetryStrategy([
+			423, 425, 429,
+		], $delayMs, $multiplier), $maxRetries);
+
+		return $clone;
 	}
 
 	/**
