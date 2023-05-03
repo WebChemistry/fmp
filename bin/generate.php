@@ -4,6 +4,7 @@ use Nette\Utils\Json;
 use Typertion\Php\ArrayTypeAssert;
 use WebChemistry\Fmp\Result\Grade;
 use WebChemistry\Fmp\Result\HistoricalLine;
+use WebChemistry\Fmp\Utility\FmpConverter;
 use WebChemistry\FmpGenerator\CommentType;
 use WebChemistry\FmpGenerator\CommentTypeLocation;
 use WebChemistry\FmpGenerator\Configuration;
@@ -235,6 +236,43 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('allTimeAvgPTPercentDif', 'float', ArrayTypeAssert::floatish(...))
 		->addProperty('publishers', 'array', ArrayTypeAssert::string(...), commentType: new CommentType('array<string>', CommentTypeLocation::Method),
 			converter: '$value = array_map(fn (string $v): string => substr($v, 1, -1), explode(\', \', substr($value, 1, -1)));'),
+	(new Configuration('Profile', messageWithSymbol: true, containsSymbol: true, uses: [FmpConverter::class]))
+		->addProperty('Symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+		->addProperty('Price', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, emptyIsNull: true, fieldName: 'price')
+		->addProperty('Beta', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, fieldName: 'beta')
+		->addProperty('VolAvg', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, fieldName: 'volAvg')
+		->addProperty('MktCap', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, fieldName: 'mktCap')
+		->addProperty('LastDiv', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, fieldName: 'lastDiv')
+		->addProperty('Range', 'string', ArrayTypeAssert::string(...), emptyIsNull: true, fieldName: 'range')
+		->addProperty('Changes', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, emptyIsNull: true, fieldName: 'changes')
+		->addProperty('companyName', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('currency', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('cik', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('isin', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('cusip', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('exchange', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('exchangeShortName', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('industry', 'string', ArrayTypeAssert::string(...), emptyIsNull: true, converter: '$value = FmpConverter::convertIndustry($value);')
+		->addProperty('website', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('description', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('CEO', 'string', ArrayTypeAssert::string(...), emptyIsNull: true, fieldName: 'ceo')
+		->addProperty('sector', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('country', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('fullTimeEmployees', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, emptyIsNull: true)
+		->addProperty('phone', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('address', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('city', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('state', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('zip', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('DCF_diff', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, emptyIsNull: true, fieldName: 'dcfDiff')
+		->addProperty('DCF', 'string', ArrayTypeAssert::string(...), zeroIsNull: true, fieldName: 'dcf')
+		->addProperty('image', 'string', ArrayTypeAssert::string(...))
+		->addProperty('ipoDate', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
+		->addProperty('defaultImage', 'string', ArrayTypeAssert::string(...))
+		->addProperty('isEtf', 'string', ArrayTypeAssert::string(...))
+		->addProperty('isActivelyTrading', 'string', ArrayTypeAssert::string(...))
+		->addProperty('isFund', 'string', ArrayTypeAssert::string(...))
+		->addProperty('isAdr', 'string', ArrayTypeAssert::string(...))
 ]);
 
 $generator->generate();

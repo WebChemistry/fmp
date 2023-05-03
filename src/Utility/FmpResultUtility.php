@@ -4,6 +4,8 @@ namespace WebChemistry\Fmp\Utility;
 
 use LogicException;
 use ReflectionClass;
+use WebChemistry\Fmp\Response\ChildrenResponse;
+use WebChemistry\Fmp\Result\FmpResult;
 
 final class FmpResultUtility
 {
@@ -22,6 +24,23 @@ final class FmpResultUtility
 		}
 
 		return $fields;
+	}
+
+	/**
+	 * @template T
+	 * @param ChildrenResponse<T> $response
+	 * @return mixed[]
+	 */
+	public static function map(ChildrenResponse $response, string $field): array
+	{
+		$values = [];
+
+		/** @var FmpResult $object */
+		foreach ($response->yieldObjects() as $object) {
+			$values[] = $object->getSingleParsedData($field);
+		}
+
+		return $values;
 	}
 
 	public function getFieldValue(object $result, string $field): mixed

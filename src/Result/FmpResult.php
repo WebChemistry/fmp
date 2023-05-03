@@ -6,6 +6,7 @@ use DateTime;
 use DateTimeZone;
 use Exception;
 use Nette\Utils\Floats;
+use OutOfBoundsException;
 
 abstract class FmpResult
 {
@@ -27,6 +28,17 @@ abstract class FmpResult
 	public function getRawData(): array
 	{
 		return $this->data;
+	}
+
+	public function getSingleParsedData(string $field): mixed
+	{
+		if (!in_array($field, $this->getFieldNames(), true)) {
+			throw new OutOfBoundsException(sprintf('Field %s does not exist.', $field));
+		}
+
+		$getter = sprintf('get%s', ucfirst($field));
+
+		return $this->$getter();
 	}
 
 	/**

@@ -26,6 +26,7 @@ use WebChemistry\Fmp\Result\HistoricalPriceFullLine;
 use WebChemistry\Fmp\Result\KeyMetrics;
 use WebChemistry\Fmp\Result\MarketOpen;
 use WebChemistry\Fmp\Result\PriceTarget;
+use WebChemistry\Fmp\Result\Profile;
 use WebChemistry\Fmp\Result\Quote;
 use WebChemistry\Fmp\Result\Ratios;
 use WebChemistry\Fmp\Result\Score;
@@ -143,6 +144,14 @@ final class FmpClient
 	public function priceTargetsBulk(): ChildrenResponse
 	{
 		return $this->requestObjects(PriceTarget::class, $this->createV4('price-target-summary-bulk'));
+	}
+
+	/**
+	 * @return ChildrenResponse<Profile>
+	 */
+	public function profiles(): ChildrenResponse
+	{
+		return $this->requestObjects(Profile::class, $this->createV4('profile/all'));
 	}
 
 	/**
