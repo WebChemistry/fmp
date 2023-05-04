@@ -3,15 +3,12 @@
 namespace WebChemistry\Fmp\Result;
 
 use DateTime;
-use DateTimeZone;
 use Exception;
 use Nette\Utils\Floats;
 use OutOfBoundsException;
 
 abstract class FmpResult
 {
-
-	private static DateTimeZone $dateTimeZone;
 
 	/**
 	 * @param mixed[] $data
@@ -69,17 +66,13 @@ abstract class FmpResult
 	protected function dateTime(mixed $value, bool $throw = true): ?DateTime
 	{
 		if (is_int($value)) {
-			$value = sprintf('@%d', $value);
+			$value = date('Y-m-d H:i:s', $value);
 		}
 
 		if (is_string($value)) {
-			$timezone = self::getDateTimeZone();
-
 			try {
-				$dateTime = new DateTime($value);
-				$dateTime->setTimezone($timezone);
+				return new DateTime($value);
 
-				return $dateTime;
 			} catch (Exception $exception) {
 				if ($throw) {
 					throw $exception;
@@ -96,10 +89,5 @@ abstract class FmpResult
 	 * @return string[]
 	 */
 	abstract protected function getFieldNames(): array;
-
-	private static function getDateTimeZone(): DateTimeZone
-	{
-		return self::$dateTimeZone ??= new DateTimeZone(date_default_timezone_get());
-	}
 
 }
