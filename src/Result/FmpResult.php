@@ -7,6 +7,7 @@ use DateTimeZone;
 use Exception;
 use Nette\Utils\Floats;
 use OutOfBoundsException;
+use Typertion\Php\TypeAssert;
 
 abstract class FmpResult
 {
@@ -15,9 +16,11 @@ abstract class FmpResult
 
 	/**
 	 * @param mixed[] $data
+	 * @param mixed[] $options
 	 */
 	public function __construct(
 		protected readonly array $data,
+		protected readonly array $options = [],
 	)
 	{
 	}
@@ -69,14 +72,21 @@ abstract class FmpResult
 	protected function dateTime(mixed $value, bool $throw = true): ?DateTime
 	{
 		if (is_int($value)) {
-			$value = date('Y-m-d H:i:s', $value);
+			if (isset($this->options['timeZone'])) {
+				$value = date('Y-m-d H:i:s', $value);
+			} else {
+				$value = sprintf('@%d', $value);
+			}
 		}
 
 		if (is_string($value)) {
 			$timezone = self::getDateTimeZone();
 
 			try {
-				$dateTime = new DateTime($value);
+				$dateTime = new DateTime(
+					$value,
+					TypeAssert::instanceOfOrNull($this->options['timeZone'] ?? null, DateTimeZone::class),
+				);
 				$dateTime->setTimezone($timezone);
 
 				return $dateTime;

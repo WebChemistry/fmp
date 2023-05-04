@@ -15,14 +15,16 @@ final class ObjectResponse extends Response implements ChildResponse
 
 	/**
 	 * @param class-string<T> $className
+	 * @param mixed[] $options
 	 */
 	public function __construct(
 		private readonly string $className,
 		HttpDecoder $decoder,
 		RequestArguments $arguments,
+		array $options = [],
 	)
 	{
-		parent::__construct($decoder, $arguments);
+		parent::__construct($decoder, $arguments, $options);
 	}
 
 	/**
@@ -30,7 +32,7 @@ final class ObjectResponse extends Response implements ChildResponse
 	 */
 	public function getObject(bool $throw = true): object
 	{
-		return new ($this->className)($this->toArray($throw));
+		return new ($this->className)($this->toArray($throw), $this->options);
 	}
 
 }

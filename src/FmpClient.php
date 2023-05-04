@@ -2,6 +2,7 @@
 
 namespace WebChemistry\Fmp;
 
+use DateTimeZone;
 use InvalidArgumentException;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\Retry\GenericRetryStrategy;
@@ -87,9 +88,11 @@ final class FmpClient
 	/**
 	 * @return ChildResponse<HistoricalChart>
 	 */
-	public function historicalChart(string $symbol, string $interval = '1min'): ChildResponse
+	public function historicalChart(string $symbol, string $interval = '1min', ?DateTimeZone $dateTimeZone = null): ChildResponse
 	{
-		return $this->requestObject(HistoricalChart::class, $this->createV3(['historical-chart', $interval, $symbol]));
+		return $this->requestObject(HistoricalChart::class, $this->createV3(['historical-chart', $interval, $symbol]), [
+			'timeZone' => $dateTimeZone,
+		]);
 	}
 
 	/**
@@ -309,11 +312,12 @@ final class FmpClient
 	/**
 	 * @template T of FmpResult
 	 * @param class-string<T> $className
+	 * @param mixed[] $options
 	 * @return ChildResponse<T>
 	 */
-	private function requestObject(string $className, RequestArguments $arguments): ChildResponse
+	private function requestObject(string $className, RequestArguments $arguments, array $options = []): ChildResponse
 	{
-		$this->applyRepeatable($response = new ObjectResponse($className, $this->decoder, $arguments));
+		$this->applyRepeatable($response = new ObjectResponse($className, $this->decoder, $arguments, $options));
 
 		return $response;
 	}

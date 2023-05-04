@@ -25,9 +25,13 @@ abstract class Response implements ResponseInterface
 	/** @var mixed[] */
 	private array $arrayData;
 
+	/**
+	 * @param mixed[] $options
+	 */
 	public function __construct(
 		private readonly HttpDecoder $decoder,
 		private readonly RequestArguments $arguments,
+		protected readonly array $options = [],
 	)
 	{
 		$this->retryRequest();

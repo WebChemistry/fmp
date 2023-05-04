@@ -38,15 +38,17 @@ class ObjectsResponse extends Response implements ChildrenResponse
 	/**
 	 * @param class-string<T> $className
 	 * @param (callable(mixed[]): mixed[])|null $getter
+	 * @param mixed[] $options
 	 */
 	public function __construct(
 		private readonly string $className,
 		HttpDecoder $decoder,
 		RequestArguments $arguments,
 		?callable $getter = null,
+		array $options = [],
 	)
 	{
-		parent::__construct($decoder, $arguments);
+		parent::__construct($decoder, $arguments, $options);
 
 		$this->getter = $getter;
 	}
@@ -93,7 +95,7 @@ class ObjectsResponse extends Response implements ChildrenResponse
 		}
 
 		foreach ($array as $object) {
-			yield new ($this->className)($object);
+			yield new ($this->className)($object, $this->options);
 		}
 	}
 

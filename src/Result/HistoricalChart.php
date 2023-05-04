@@ -16,7 +16,7 @@ final class HistoricalChart extends FmpResult
 	public function getItems(): array
 	{
 		return array_map(
-			fn (mixed $item): HistoricalChartItem => new HistoricalChartItem(TypeAssert::array($item)),
+			fn (mixed $item): HistoricalChartItem => new HistoricalChartItem(TypeAssert::array($item), $this->options),
 			$this->data,
 		);
 	}
