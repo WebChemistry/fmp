@@ -10,7 +10,7 @@ final class HistoricalLine extends FmpResult
 
 	public function getDate(): DateTime
 	{
-		return new DateTime(sprintf('%s 00:00:00', $this->data['date']));
+		return self::dateTime(sprintf('%s 00:00:00', $this->data['date']));
 	}
 
 	public function getClose(): float
