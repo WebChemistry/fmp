@@ -30,8 +30,8 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 		'costAndExpenses',
 		'interestExpense',
 		'depreciationAndAmortization',
-		'EBITDA',
-		'EBITDARatio',
+		'ebitda',
+		'ebitdaRatio',
 		'operatingIncome',
 		'operatingIncomeRatio',
 		'totalOtherIncomeExpensesNet',
@@ -40,8 +40,8 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 		'incomeTaxExpense',
 		'netIncome',
 		'netIncomeRatio',
-		'EPS',
-		'EPSDiluted',
+		'eps',
+		'epsDiluted',
 		'weightedAverageShsOut',
 		'weightedAverageShsOutDil',
 		'link',
@@ -257,7 +257,7 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 	}
 
 
-	public function getEBITDA(): float|null
+	public function getEbitda(): float|null
 	{
 		$value = ArrayTypeAssert::floatish($this->data, 'EBITDA', fn (): string => sprintf('%s of %s', 'EBITDA', $this->getSymbol()));
 
@@ -269,7 +269,7 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 	}
 
 
-	public function getEBITDARatio(): float|null
+	public function getEbitdaRatio(): float|null
 	{
 		$value = ArrayTypeAssert::floatish($this->data, 'EBITDARatio', fn (): string => sprintf('%s of %s', 'EBITDARatio', $this->getSymbol()));
 
@@ -377,7 +377,7 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 	}
 
 
-	public function getEPS(): float|null
+	public function getEps(): float|null
 	{
 		$value = ArrayTypeAssert::floatish($this->data, 'EPS', fn (): string => sprintf('%s of %s', 'EPS', $this->getSymbol()));
 
@@ -389,7 +389,7 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 	}
 
 
-	public function getEPSDiluted(): float|null
+	public function getEpsDiluted(): float|null
 	{
 		$value = ArrayTypeAssert::floatish($this->data, 'EPSDiluted', fn (): string => sprintf('%s of %s', 'EPSDiluted', $this->getSymbol()));
 
