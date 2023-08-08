@@ -25,6 +25,7 @@ use WebChemistry\Fmp\Result\GradeConsensus;
 use WebChemistry\Fmp\Result\HistoricalChart;
 use WebChemistry\Fmp\Result\HistoricalPriceFull;
 use WebChemistry\Fmp\Result\HistoricalPriceFullLine;
+use WebChemistry\Fmp\Result\IncomeStatement;
 use WebChemistry\Fmp\Result\KeyMetrics;
 use WebChemistry\Fmp\Result\MarketOpen;
 use WebChemistry\Fmp\Result\PriceTarget;
@@ -166,6 +167,17 @@ final class FmpClient
 	public function profiles(): ChildrenResponse
 	{
 		return $this->requestObjects(Profile::class, $this->createV4('profile/all'));
+	}
+
+	/**
+	 * @return ChildrenResponse<IncomeStatement>
+	 */
+	public function incomeStatementBulk(string|int|null $year = null, string $period = 'annual'): ChildrenResponse
+	{
+		return $this->requestObjects(IncomeStatement::class, $this->createV4('income-statement-bulk', [
+			'year' => $year ?? date('Y'),
+			'period' => $period,
+		]));
 	}
 
 	/**
