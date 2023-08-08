@@ -9,8 +9,8 @@ use Typertion\Php\ArrayTypeAssert;
 final class IncomeStatement extends FmpResult implements SymbolResult
 {
 	public const META_FIELDS = [
-		'symbol',
 		'date',
+		'symbol',
 		'reportedCurrency',
 		'cik',
 		'fillingDate',
@@ -30,8 +30,8 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 		'costAndExpenses',
 		'interestExpense',
 		'depreciationAndAmortization',
-		'eBITDA',
-		'eBITDARatio',
+		'EBITDA',
+		'EBITDARatio',
 		'operatingIncome',
 		'operatingIncomeRatio',
 		'totalOtherIncomeExpensesNet',
@@ -40,8 +40,8 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 		'incomeTaxExpense',
 		'netIncome',
 		'netIncomeRatio',
-		'ePS',
-		'ePSDiluted',
+		'EPS',
+		'EPSDiluted',
 		'weightedAverageShsOut',
 		'weightedAverageShsOutDil',
 		'link',
@@ -49,15 +49,15 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 		'interestIncome',
 	];
 
-	public function getSymbol(): string
-	{
-		return ArrayTypeAssert::string($this->data, 'symbol');
-	}
-
-
 	public function getDate(): string
 	{
 		return ArrayTypeAssert::string($this->data, 'date', fn (): string => sprintf('%s of %s', 'date', $this->getSymbol()));
+	}
+
+
+	public function getSymbol(): string
+	{
+		return ArrayTypeAssert::string($this->data, 'symbol');
 	}
 
 
