@@ -212,6 +212,17 @@ final class FmpClient
 
 					throw new NotFoundException(sprintf('DCF for symbol %s not found.', $symbol));
 				}
+
+				if (!is_numeric($result['dcf'])) {
+					$message = sprintf('DCF for symbol %s is invalid. ', $result['symbol']);
+
+					if (is_string($result['dcf'])) {
+						$message .= $result['dcf'];
+					}
+
+					throw new NotFoundException($message);
+				}
+
 				return $result;
 			},
 		);
