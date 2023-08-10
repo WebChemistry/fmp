@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use Symfony\Component\Serializer\Encoder\JsonDecode;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
+use WebChemistry\Fmp\Exception\EmptyResponseException;
 use WebChemistry\Fmp\Request\RequestArguments;
 use WebChemistry\Fmp\Request\RequestSymbolLimit;
 use WebChemistry\Fmp\Response\ChildrenResponse;
@@ -20,6 +21,7 @@ use WebChemistry\Fmp\Response\MergedObjectsResponse;
 use WebChemistry\Fmp\Response\ObjectResponse;
 use WebChemistry\Fmp\Response\ObjectsResponse;
 use WebChemistry\Fmp\Response\Response;
+use WebChemistry\Fmp\Result\DiscountedCashFlow;
 use WebChemistry\Fmp\Result\FmpResult;
 use WebChemistry\Fmp\Result\GradeConsensus;
 use WebChemistry\Fmp\Result\HistoricalChart;
@@ -193,6 +195,15 @@ final class FmpClient
 	}
 
 	/**
+	 * @throws EmptyResponseException
+	 * @return ChildResponse<DiscountedCashFlow>
+	 */
+	public function discountedCashFlow(string $symbol): ChildResponse
+	{
+		return $this->requestObject(DiscountedCashFlow::class, $this->createV3(['discounted-cash-flow', $symbol]), itemAsArray: true);
+	}
+
+	/**
 	 * @return ChildrenResponse<GradeConsensus>
 	 */
 	public function gradeConsensusBulk(): ChildrenResponse
@@ -339,8 +350,16 @@ final class FmpClient
 	 * @param mixed[] $options
 	 * @return ChildResponse<T>
 	 */
-	private function requestObject(string $className, RequestArguments $arguments, array $options = []): ChildResponse
+	private function requestObject(string $className, RequestArguments $arguments, array $options = [], bool $itemAsArray = false): ChildResponse
 	{
+		$options['metadata'] = [
+			'safeLink' => fn () => str_replace($this->apiKey, 'secret', $arguments->url),
+		];
+
+		if ($itemAsArray) {
+			$options['metadata']['itemAsArray'] = true;
+		}
+
 		$this->applyRepeatable($response = new ObjectResponse($className, $this->decoder, $arguments, $options));
 
 		return $response;

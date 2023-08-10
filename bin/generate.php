@@ -344,6 +344,11 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('growthWeightedAverageShsOut', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'growthWeightedAverageShsOut')
 		->addProperty('growthWeightedAverageShsOutDil', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'growthWeightedAverageShsOutDil')
 	,
+		(new Configuration('DiscountedCashFlow', messageWithSymbol: true, containsSymbol: true))
+			->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+			->addProperty('date', ...dateTimeField())
+			->addProperty('dcf', 'float', ArrayTypeAssert::floatish(...), fieldName: 'dcf')
+			->addProperty('Stock Price', 'float', ArrayTypeAssert::floatish(...), fieldName: 'stockPrice')
 ]);
 
 $generator->generate();

@@ -8,6 +8,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 use Traversable;
 use Typertion\Php\TypeAssert;
 use WebChemistry\Fmp\Exception\DecodingException;
+use WebChemistry\Fmp\Exception\EmptyResponseException;
 use WebChemistry\Fmp\Exception\InvalidFmpRequestException;
 use WebChemistry\Fmp\Request\RequestArguments;
 use WebChemistry\Fmp\Serializer\HttpDecoder;
@@ -25,15 +26,25 @@ abstract class Response implements ResponseInterface
 	/** @var mixed[] */
 	private array $arrayData;
 
+	/** @var mixed[] */
+	private array $metadata;
+
+	/** @var mixed[] */
+	protected readonly array $options;
+
 	/**
 	 * @param mixed[] $options
 	 */
 	public function __construct(
 		private readonly HttpDecoder $decoder,
 		private readonly RequestArguments $arguments,
-		protected readonly array $options = [],
+		array $options = [],
 	)
 	{
+		$this->metadata = $options['metadata'] ?? [];
+		unset($options['metadata']);
+		$this->options = $options;
+
 		$this->retryRequest();
 	}
 
@@ -109,6 +120,16 @@ abstract class Response implements ResponseInterface
 				);
 			}
 
+			if (($this->metadata['itemAsArray'] ?? false)) {
+				if (!isset($result[0])) {
+					throw new EmptyResponseException(
+						sprintf('Response is empty for "%s".', $this->getSafeLink()),
+					);
+				}
+
+				$result = $result[0];
+			}
+
 			if ($cache) {
 				$this->arrayData = $result;
 			}
@@ -117,6 +138,15 @@ abstract class Response implements ResponseInterface
 		} catch (UnexpectedValueException $exception) {
 			throw new DecodingException($exception->getMessage(), 0, $exception);
 		}
+	}
+
+	private function getSafeLink(): string
+	{
+		if (!isset($this->metadata['safeLink'])) {
+			return '';
+		}
+
+		return $this->metadata['safeLink']();
 	}
 
 	/**
