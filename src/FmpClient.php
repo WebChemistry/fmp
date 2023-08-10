@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Encoder\JsonDecode;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use WebChemistry\Fmp\Exception\EmptyResponseException;
+use WebChemistry\Fmp\Exception\NotFoundException;
 use WebChemistry\Fmp\Request\RequestArguments;
 use WebChemistry\Fmp\Request\RequestSymbolLimit;
 use WebChemistry\Fmp\Response\ChildrenResponse;
@@ -200,7 +201,20 @@ final class FmpClient
 	 */
 	public function discountedCashFlow(string $symbol): ChildResponse
 	{
-		return $this->requestObject(DiscountedCashFlow::class, $this->createV3(['discounted-cash-flow', $symbol]), itemAsArray: true);
+		return $this->requestObject(
+			DiscountedCashFlow::class,
+			$this->createV3(['discounted-cash-flow', $symbol]),
+			itemAsArray: true,
+			callback: function (array $result): array {
+				if (!isset($result['dcf'])) {
+					$symbol = $result['symbol'] ?? null;
+					$symbol = is_string($symbol) ? $symbol : null;
+
+					throw new NotFoundException(sprintf('DCF for symbol %s not found.', $symbol));
+				}
+				return $result;
+			},
+		);
 	}
 
 	/**
@@ -348,12 +362,14 @@ final class FmpClient
 	 * @template T of FmpResult
 	 * @param class-string<T> $className
 	 * @param mixed[] $options
+	 * @param (callable(mixed[]): mixed[])|null $callback
 	 * @return ChildResponse<T>
 	 */
-	private function requestObject(string $className, RequestArguments $arguments, array $options = [], bool $itemAsArray = false): ChildResponse
+	private function requestObject(string $className, RequestArguments $arguments, array $options = [], bool $itemAsArray = false, ?callable $callback = null): ChildResponse
 	{
 		$options['metadata'] = [
 			'safeLink' => fn () => str_replace($this->apiKey, 'secret', $arguments->url),
+			'callback' => $callback,
 		];
 
 		if ($itemAsArray) {

@@ -2,7 +2,7 @@
 
 namespace WebChemistry\Fmp\Exception;
 
-final class EmptyResponseException extends NotFoundException
+class NotFoundException extends \Exception
 {
 
 }

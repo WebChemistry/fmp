@@ -130,6 +130,10 @@ abstract class Response implements ResponseInterface
 				$result = $result[0];
 			}
 
+			if (isset($this->metadata['callback'])) {
+				$result = ($this->metadata['callback'])($result);
+			}
+
 			if ($cache) {
 				$this->arrayData = $result;
 			}
