@@ -348,7 +348,25 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 			->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
 			->addProperty('date', ...dateTimeField())
 			->addProperty('dcf', 'float', ArrayTypeAssert::floatish(...), fieldName: 'dcf')
-			->addProperty('Stock Price', 'float', ArrayTypeAssert::floatish(...), fieldName: 'stockPrice')
+			->addProperty('Stock Price', 'float', ArrayTypeAssert::floatish(...), fieldName: 'stockPrice'),
+		(new Configuration('Rating', messageWithSymbol: true, containsSymbol: true))
+			->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+			->addProperty('date', 'string', ArrayTypeAssert::string(...), fieldName: 'date')
+			->addProperty('rating', 'string', ArrayTypeAssert::string(...), fieldName: 'rating')
+			->addProperty('ratingScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingScore')
+			->addProperty('ratingRecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingRecommendation')
+			->addProperty('ratingDetailsDCFScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingDetailsDcfScore')
+			->addProperty('ratingDetailsDCFRecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsDcfRecommendation')
+			->addProperty('ratingDetailsROEScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingDetailsRoeScore')
+			->addProperty('ratingDetailsROERecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsRoeRecommendation')
+			->addProperty('ratingDetailsROAScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingDetailsRoaScore')
+			->addProperty('ratingDetailsROARecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsRoaRecommendation')
+			->addProperty('ratingDetailsDEScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingDetailsDeScore')
+			->addProperty('ratingDetailsDERecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsDeRecommendation')
+			->addProperty('ratingDetailsPEScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingDetailsPeScore')
+			->addProperty('ratingDetailsPERecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsPeRecommendation')
+			->addProperty('ratingDetailsPBScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingDetailsPbScore')
+			->addProperty('ratingDetailsPBRecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsPbRecommendation'),
 ]);
 
 $generator->generate();

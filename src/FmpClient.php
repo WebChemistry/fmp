@@ -35,6 +35,7 @@ use WebChemistry\Fmp\Result\MarketOpen;
 use WebChemistry\Fmp\Result\PriceTarget;
 use WebChemistry\Fmp\Result\Profile;
 use WebChemistry\Fmp\Result\Quote;
+use WebChemistry\Fmp\Result\Rating;
 use WebChemistry\Fmp\Result\Ratios;
 use WebChemistry\Fmp\Result\Score;
 use WebChemistry\Fmp\Result\StockPriceChange;
@@ -182,6 +183,14 @@ final class FmpClient
 			'year' => $year ?? date('Y'),
 			'period' => $period,
 		]));
+	}
+
+	/**
+	 * @return ChildrenResponse<Rating>
+	 */
+	public function ratingBulk(): ChildrenResponse
+	{
+		return $this->requestObjects(Rating::class, $this->createV4('rating-bulk'));
 	}
 
 	/**
