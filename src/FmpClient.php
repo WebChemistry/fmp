@@ -23,6 +23,7 @@ use WebChemistry\Fmp\Response\ObjectResponse;
 use WebChemistry\Fmp\Response\ObjectsResponse;
 use WebChemistry\Fmp\Response\Response;
 use WebChemistry\Fmp\Result\DiscountedCashFlow;
+use WebChemistry\Fmp\Result\EarningCallTranscriptRow;
 use WebChemistry\Fmp\Result\FmpResult;
 use WebChemistry\Fmp\Result\GradeConsensus;
 use WebChemistry\Fmp\Result\HistoricalChart;
@@ -182,6 +183,16 @@ final class FmpClient
 		return $this->requestObjects(IncomeStatement::class, $this->createV4('income-statement-bulk', [
 			'year' => $year ?? date('Y'),
 			'period' => $period,
+		]));
+	}
+
+	/**
+	 * @return ChildrenResponse<EarningCallTranscriptRow>
+	 */
+	public function earningCallTranscriptList(string $symbol): ChildrenResponse
+	{
+		return $this->requestObjects(EarningCallTranscriptRow::class, $this->createV4('earning_call_transcript', [
+			'symbol' => $symbol,
 		]));
 	}
 

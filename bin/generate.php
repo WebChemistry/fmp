@@ -367,6 +367,11 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 			->addProperty('ratingDetailsPERecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsPeRecommendation')
 			->addProperty('ratingDetailsPBScore', 'int', ArrayTypeAssert::integerish(...), fieldName: 'ratingDetailsPbScore')
 			->addProperty('ratingDetailsPBRecommendation', 'string', ArrayTypeAssert::string(...), fieldName: 'ratingDetailsPbRecommendation'),
+	(new Configuration('EarningCallTranscriptRow'))
+		->addProperty('0', 'int', ArrayTypeAssert::int(...), fieldName: 'quarter')
+		->addProperty('1', 'int', ArrayTypeAssert::int(...), fieldName: 'year')
+		->addProperty('2', 'string', ArrayTypeAssert::string(...), fieldName: 'date')
+	,
 ]);
 
 $generator->generate();
