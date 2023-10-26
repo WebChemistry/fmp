@@ -34,6 +34,7 @@ use WebChemistry\Fmp\Result\IncomeStatementGrowth;
 use WebChemistry\Fmp\Result\KeyMetrics;
 use WebChemistry\Fmp\Result\MarketOpen;
 use WebChemistry\Fmp\Result\PriceTarget;
+use WebChemistry\Fmp\Result\PriceTargetConsensus;
 use WebChemistry\Fmp\Result\Profile;
 use WebChemistry\Fmp\Result\Quote;
 use WebChemistry\Fmp\Result\Rating;
@@ -197,11 +198,11 @@ final class FmpClient
 	}
 
 	/**
-	 * @return ChildrenResponse<PriceTarget>
+	 * @return ChildrenResponse<PriceTargetConsensus>
 	 */
 	public function priceTargetConsensus(string $symbol): ChildrenResponse
 	{
-		return $this->requestObjects(PriceTarget::class, $this->createV4('price-target-consensus', [
+		return $this->requestObjects(PriceTargetConsensus::class, $this->createV4('price-target-consensus', [
 			'symbol' => $symbol,
 		]));
 	}
@@ -302,12 +303,27 @@ final class FmpClient
 	/**
 	 * @template T of FmpResult
 	 * @param class-string<T> $className
-	 * @param callable(): iterable<ChildrenResponse<T>> $factory
+	 * @param callable(FmpClient $client): iterable<ChildrenResponse<T>> $factory
+	 * @param array{
+	 *     chunks?: int,
+	 * } $options
 	 * @return MergedObjectsResponse<T>
 	 */
-	public function requestMultiple(string $className, callable $factory): MergedObjectsResponse
+	public function requestMultiple(string $className, callable $factory, array $options = []): MergedObjectsResponse
 	{
-		$responses = $factory();
+		$responses = $factory($this);
+
+		if (($options['chunks'] ?? 0) > 0) {
+			$i = 1;
+			$results = [];
+
+			foreach ($responses as $response) {
+				$results[] = $response;
+
+				$i++;
+			}
+		}
+
 		$responses = is_array($responses) ? $responses : iterator_to_array($responses);
 
 		return new MergedObjectsResponse($className, $responses);
