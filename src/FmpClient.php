@@ -197,6 +197,16 @@ final class FmpClient
 	}
 
 	/**
+	 * @return ChildrenResponse<PriceTarget>
+	 */
+	public function priceTargetConsensus(string $symbol): ChildrenResponse
+	{
+		return $this->requestObjects(PriceTarget::class, $this->createV4('price-target-consensus', [
+			'symbol' => $symbol,
+		]));
+	}
+
+	/**
 	 * @return ChildrenResponse<Rating>
 	 */
 	public function ratingBulk(): ChildrenResponse

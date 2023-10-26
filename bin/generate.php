@@ -370,8 +370,13 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 	(new Configuration('EarningCallTranscriptRow'))
 		->addProperty('0', 'int', ArrayTypeAssert::int(...), fieldName: 'quarter')
 		->addProperty('1', 'int', ArrayTypeAssert::int(...), fieldName: 'year')
-		->addProperty('2', 'string', ArrayTypeAssert::string(...), fieldName: 'date')
-	,
+		->addProperty('2', 'string', ArrayTypeAssert::string(...), fieldName: 'date'),
+	(new Configuration('PriceTargetConsensus'))
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+		->addProperty('targetHigh', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetHigh')
+		->addProperty('targetLow', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetLow')
+		->addProperty('targetConsensus', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetConsensus')
+		->addProperty('targetMedian', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetMedian'),
 ]);
 
 $generator->generate();
