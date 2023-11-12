@@ -377,6 +377,15 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('targetLow', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetLow')
 		->addProperty('targetConsensus', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetConsensus')
 		->addProperty('targetMedian', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetMedian'),
+	(new Configuration('EndOfDayPrice'))
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+		->addProperty('date', 'string', ArrayTypeAssert::string(...), fieldName: 'date')
+		->addProperty('open', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'open')
+		->addProperty('low', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'low')
+		->addProperty('high', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'high')
+		->addProperty('close', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'close')
+		->addProperty('adjClose', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'adjClose')
+		->addProperty('volume', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'volume'),
 ]);
 
 $generator->generate();
