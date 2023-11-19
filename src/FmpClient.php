@@ -200,6 +200,8 @@ final class FmpClient
 	}
 
 	/**
+	 * Updated every 23:00 UTC
+	 *
 	 * @return ChildrenResponse<EndOfDayPrice>
 	 */
 	public function endOfDayPrices(DateTimeInterface $dateTime): ChildrenResponse
