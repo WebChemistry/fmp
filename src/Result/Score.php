@@ -27,14 +27,22 @@ final class Score extends FmpResult implements SymbolResult
 	}
 
 
-	public function getAltmanZScore(): float
+	public function getAltmanZScore(): float|null
 	{
+		if (($this->data['altmanZScore'] ?? null) === '') {
+			return null;
+		}
+
 		return ArrayTypeAssert::floatish($this->data, 'altmanZScore', fn (): string => sprintf('%s of %s', 'altmanZScore', $this->getSymbol()));
 	}
 
 
-	public function getPiotroskiScore(): int
+	public function getPiotroskiScore(): int|null
 	{
+		if (($this->data['piotroskiScore'] ?? null) === '') {
+			return null;
+		}
+
 		return ArrayTypeAssert::integerish($this->data, 'piotroskiScore', fn (): string => sprintf('%s of %s', 'piotroskiScore', $this->getSymbol()));
 	}
 

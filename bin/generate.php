@@ -175,8 +175,8 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 	,
 	(new Configuration('Score', messageWithSymbol: true, containsSymbol: true))
 		->addProperty('symbol', 'string', ArrayTypeAssert::string(...))
-		->addProperty('altmanZScore', 'float', ArrayTypeAssert::floatish(...))
-		->addProperty('piotroskiScore', 'int', ArrayTypeAssert::integerish(...))
+		->addProperty('altmanZScore', 'float', ArrayTypeAssert::floatish(...), emptyIsNull: true)
+		->addProperty('piotroskiScore', 'int', ArrayTypeAssert::integerish(...), emptyIsNull: true)
 		->addProperty('workingCapital', 'float', ArrayTypeAssert::floatish(...), emptyIsNull: true)
 		->addProperty('totalAssets', 'float', ArrayTypeAssert::floatish(...), emptyIsNull: true)
 		->addProperty('retainedEarnings', 'float', ArrayTypeAssert::floatish(...), emptyIsNull: true)
