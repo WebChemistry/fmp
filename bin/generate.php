@@ -386,6 +386,13 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('close', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'close')
 		->addProperty('adjClose', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'adjClose')
 		->addProperty('volume', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'volume'),
+	(new Configuration('SplitCalendarRecord'))
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+		->addProperty('date', ...dateTimeField())
+		->addProperty('label', 'string', ArrayTypeAssert::string(...), fieldName: 'label')
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+		->addProperty('numerator', 'float', ArrayTypeAssert::floatish(...), fieldName: 'numerator')
+		->addProperty('denominator', 'float', ArrayTypeAssert::floatish(...), fieldName: 'denominator')
 ]);
 
 $generator->generate();

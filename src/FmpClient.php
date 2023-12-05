@@ -42,6 +42,7 @@ use WebChemistry\Fmp\Result\Quote;
 use WebChemistry\Fmp\Result\Rating;
 use WebChemistry\Fmp\Result\Ratios;
 use WebChemistry\Fmp\Result\Score;
+use WebChemistry\Fmp\Result\SplitCalendarRecord;
 use WebChemistry\Fmp\Result\StockPriceChange;
 use WebChemistry\Fmp\Serializer\HttpDecoder;
 
@@ -196,6 +197,17 @@ final class FmpClient
 	{
 		return $this->requestObjects(EarningCallTranscriptRow::class, $this->createV4('earning_call_transcript', [
 			'symbol' => $symbol,
+		]));
+	}
+
+	/**
+	 * @return ChildrenResponse<SplitCalendarRecord>
+	 */
+	public function stockSplitCalendar(DateTimeInterface $from, DateTimeInterface $to): ChildrenResponse
+	{
+		return $this->requestObjects(SplitCalendarRecord::class, $this->createV3('stock_split_calendar', [
+			'from' => $from->format('Y-m-d'),
+			'to' => $to->format('Y-m-d'),
 		]));
 	}
 
