@@ -371,13 +371,13 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('0', 'int', ArrayTypeAssert::int(...), fieldName: 'quarter')
 		->addProperty('1', 'int', ArrayTypeAssert::int(...), fieldName: 'year')
 		->addProperty('2', 'string', ArrayTypeAssert::string(...), fieldName: 'date'),
-	(new Configuration('PriceTargetConsensus'))
+	(new Configuration('PriceTargetConsensus', messageWithSymbol: true, containsSymbol: true))
 		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
 		->addProperty('targetHigh', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetHigh')
 		->addProperty('targetLow', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetLow')
 		->addProperty('targetConsensus', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetConsensus')
 		->addProperty('targetMedian', 'float', ArrayTypeAssert::floatish(...), fieldName: 'targetMedian'),
-	(new Configuration('EndOfDayPrice'))
+	(new Configuration('EndOfDayPrice', messageWithSymbol: true, containsSymbol: true))
 		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
 		->addProperty('date', 'string', ArrayTypeAssert::string(...), fieldName: 'date')
 		->addProperty('open', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'open')
@@ -386,7 +386,7 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('close', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'close')
 		->addProperty('adjClose', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'adjClose')
 		->addProperty('volume', 'float', ArrayTypeAssert::floatish(...), zeroIsNull: true, fieldName: 'volume'),
-	(new Configuration('SplitCalendarRecord'))
+	(new Configuration('SplitCalendarRecord', messageWithSymbol: true, containsSymbol: true))
 		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
 		->addProperty('date', ...dateTimeField())
 		->addProperty('label', 'string', ArrayTypeAssert::string(...), fieldName: 'label')
