@@ -238,6 +238,10 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getTimestamp(): int|null
 	{
+		if (!array_key_exists('timestamp', $this->data)) {
+			return null;
+		}
+
 		return ArrayTypeAssert::intOrNull($this->data, 'timestamp', fn (): string => sprintf('%s of %s', 'timestamp', $this->getSymbol()));
 	}
 
