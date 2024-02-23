@@ -94,7 +94,7 @@ final class Generator
 		}
 
 		if ($property->mayNotExist) {
-			$method->addBody('if (!array_key_exists(?, $this->data)) {', [$property->name]);
+			$method->addBody('if (!isset($this->data[?])) {', [$property->name]);
 			$method->addBody("\treturn null;");
 			$method->addBody('}');
 

@@ -44,7 +44,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getPrice(): int|float|null
 	{
-		if (!array_key_exists('price', $this->data)) {
+		if (!isset($this->data['price'])) {
 			return null;
 		}
 
@@ -60,7 +60,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getRange(): string|null
 	{
-		if (!array_key_exists('range', $this->data)) {
+		if (!isset($this->data['range'])) {
 			return null;
 		}
 
@@ -70,7 +70,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getYearHigh(): int|float|null
 	{
-		if (!array_key_exists('yearHigh', $this->data)) {
+		if (!isset($this->data['yearHigh'])) {
 			return null;
 		}
 
@@ -86,7 +86,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getYearLow(): int|float|null
 	{
-		if (!array_key_exists('yearLow', $this->data)) {
+		if (!isset($this->data['yearLow'])) {
 			return null;
 		}
 
@@ -210,7 +210,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getExchange(): string|null
 	{
-		if (!array_key_exists('exchange', $this->data)) {
+		if (!isset($this->data['exchange'])) {
 			return null;
 		}
 
@@ -238,7 +238,7 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getTimestamp(): int|null
 	{
-		if (!array_key_exists('timestamp', $this->data)) {
+		if (!isset($this->data['timestamp'])) {
 			return null;
 		}
 
