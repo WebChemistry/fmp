@@ -242,7 +242,7 @@ final class Quote extends FmpResult implements SymbolResult
 			return null;
 		}
 
-		return ArrayTypeAssert::intOrNull($this->data, 'timestamp', fn (): string => sprintf('%s of %s', 'timestamp', $this->getSymbol()));
+		return ArrayTypeAssert::integerishOrNull($this->data, 'timestamp', fn (): string => sprintf('%s of %s', 'timestamp', $this->getSymbol()));
 	}
 
 
