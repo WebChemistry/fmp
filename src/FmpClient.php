@@ -43,6 +43,7 @@ use WebChemistry\Fmp\Result\Ratios;
 use WebChemistry\Fmp\Result\Score;
 use WebChemistry\Fmp\Result\SplitCalendarRecord;
 use WebChemistry\Fmp\Result\StockPriceChange;
+use WebChemistry\Fmp\Result\SymbolItem;
 use WebChemistry\Fmp\Serializer\HttpDecoder;
 
 final class FmpClient
@@ -238,6 +239,14 @@ final class FmpClient
 	public function ratingBulk(): ChildrenResponse
 	{
 		return $this->requestObjects(Rating::class, $this->createV4('rating-bulk'));
+	}
+
+	/**
+	 * @return ChildrenResponse<SymbolItem>
+	 */
+	public function symbolList(): ChildrenResponse
+	{
+		return $this->requestObjects(SymbolItem::class, $this->createV3('stock/list'));
 	}
 
 	/**

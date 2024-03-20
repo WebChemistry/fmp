@@ -392,7 +392,15 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('label', 'string', ArrayTypeAssert::string(...), fieldName: 'label')
 		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
 		->addProperty('numerator', 'float', ArrayTypeAssert::floatish(...), fieldName: 'numerator')
-		->addProperty('denominator', 'float', ArrayTypeAssert::floatish(...), fieldName: 'denominator')
+		->addProperty('denominator', 'float', ArrayTypeAssert::floatish(...), fieldName: 'denominator'),
+	(new Configuration('SymbolItem', messageWithSymbol: true, containsSymbol: true))
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
+		->addProperty('name', 'string|null', ArrayTypeAssert::stringOrNull(...), fieldName: 'name')
+		->addProperty('price', 'float|null', ArrayTypeAssert::floatishOrNull(...), zeroIsNull: true, fieldName: 'price')
+		->addProperty('exchange', 'string|null', ArrayTypeAssert::stringOrNull(...), fieldName: 'exchange')
+		->addProperty('exchangeShortName', 'string|null', ArrayTypeAssert::stringOrNull(...), fieldName: 'exchangeShortName')
+		->addProperty('type', 'string', ArrayTypeAssert::string(...), fieldName: 'type'),
 ]);
 
 $generator->generate();
