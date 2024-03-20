@@ -27,7 +27,7 @@ final class FmpResultUtility
 	}
 
 	/**
-	 * @template T
+	 * @template T of FmpResult
 	 * @param ChildrenResponse<T> $response
 	 * @return mixed[]
 	 */

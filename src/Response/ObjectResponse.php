@@ -2,6 +2,7 @@
 
 namespace WebChemistry\Fmp\Response;
 
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use WebChemistry\Fmp\Request\RequestArguments;
 use WebChemistry\Fmp\Result\FmpResult;
 use WebChemistry\Fmp\Serializer\HttpDecoder;
@@ -20,11 +21,11 @@ final class ObjectResponse extends Response implements ChildResponse
 	public function __construct(
 		private readonly string $className,
 		HttpDecoder $decoder,
-		RequestArguments $arguments,
+		ResponseInterface $response,
 		array $options = [],
 	)
 	{
-		parent::__construct($decoder, $arguments, $options);
+		parent::__construct($decoder, $response, $options);
 	}
 
 	/**

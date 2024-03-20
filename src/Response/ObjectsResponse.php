@@ -10,6 +10,7 @@ use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use Traversable;
 use WebChemistry\Fmp\Request\RequestArguments;
 use WebChemistry\Fmp\Result\FmpResult;
@@ -43,12 +44,12 @@ class ObjectsResponse extends Response implements ChildrenResponse
 	public function __construct(
 		private readonly string $className,
 		HttpDecoder $decoder,
-		RequestArguments $arguments,
+		ResponseInterface $response,
 		?callable $getter = null,
 		array $options = [],
 	)
 	{
-		parent::__construct($decoder, $arguments, $options);
+		parent::__construct($decoder, $response, $options);
 
 		$this->getter = $getter;
 	}

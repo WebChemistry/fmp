@@ -22,7 +22,6 @@ use WebChemistry\Fmp\Response\ChildResponse;
 use WebChemistry\Fmp\Response\MergedObjectsResponse;
 use WebChemistry\Fmp\Response\ObjectResponse;
 use WebChemistry\Fmp\Response\ObjectsResponse;
-use WebChemistry\Fmp\Response\Response;
 use WebChemistry\Fmp\Result\DiscountedCashFlow;
 use WebChemistry\Fmp\Result\EarningCallTranscriptRow;
 use WebChemistry\Fmp\Result\EndOfDayPrice;
@@ -311,7 +310,7 @@ final class FmpClient
 	/**
 	 * @template T of FmpResult
 	 * @param class-string<T> $className
-	 * @param RequestArguments[] $arguments
+	 * @param ResponseInterface[] $arguments
 	 * @param (callable(mixed[]): mixed[])|null $getter
 	 * @return MergedObjectsResponse<T>
 	 */
@@ -329,35 +328,6 @@ final class FmpClient
 	/**
 	 * @template T of FmpResult
 	 * @param class-string<T> $className
-	 * @param callable(FmpClient $client): iterable<ChildrenResponse<T>> $factory
-	 * @param array{
-	 *     chunks?: int,
-	 * } $options
-	 * @return MergedObjectsResponse<T>
-	 */
-	public function requestMultiple(string $className, callable $factory, array $options = []): MergedObjectsResponse
-	{
-		$responses = $factory($this);
-
-		if (($options['chunks'] ?? 0) > 0) {
-			$i = 1;
-			$results = [];
-
-			foreach ($responses as $response) {
-				$results[] = $response;
-
-				$i++;
-			}
-		}
-
-		$responses = is_array($responses) ? $responses : iterator_to_array($responses);
-
-		return new MergedObjectsResponse($className, $responses);
-	}
-
-	/**
-	 * @template T of FmpResult
-	 * @param class-string<T> $className
 	 * @param ChildrenResponse<T>[] $responses
 	 * @return MergedObjectsResponse<T>
 	 */
@@ -370,7 +340,7 @@ final class FmpClient
 	 * @param string[]|string $path
 	 * @param non-empty-array<string> $symbols
 	 * @param mixed[] $query
-	 * @return RequestArguments[]
+	 * @return ResponseInterface[]
 	 */
 	private function createV3WithSymbolLimit(array|string $path, array $symbols, array $query = []): array
 	{
@@ -385,22 +355,22 @@ final class FmpClient
 		);
 
 		$limiter = new RequestSymbolLimit($url . '/%s%', implode(',', $symbols), max(1, 7000 - strlen($httpQuery)));
-		$urls = [];
+		$responses = [];
 
 		foreach ($limiter->getUrls() as $url) {
 			$url = $url . ($httpQuery ? '?' . $httpQuery : '');
 
-			$urls[] = new RequestArguments($this->client, 'GET', $url);
+			$responses[] = $this->client->request('GET', $url);
 		}
 
-		return $urls;
+		return $responses;
 	}
 
 	/**
 	 * @param string|string[] $path
 	 * @param mixed[] $query
 	 */
-	private function createV3(array|string $path, array $query = []): RequestArguments
+	private function createV3(array|string $path, array $query = []): ResponseInterface
 	{
 		$httpQuery = http_build_query(array_merge([
 			'apikey' => $this->apiKey,
@@ -413,14 +383,14 @@ final class FmpClient
 			$httpQuery ? '?' . $httpQuery : '',
 		);
 
-		return new RequestArguments($this->client, 'GET', $url);
+		return $this->client->request('GET', $url);
 	}
 
 	/**
 	 * @param string|string[] $path
 	 * @param mixed[] $query
 	 */
-	private function createV4(array|string $path, array $query = []): RequestArguments
+	private function createV4(array|string $path, array $query = []): ResponseInterface
 	{
 		$query = array_merge([
 			'apikey' => $this->apiKey,
@@ -435,7 +405,7 @@ final class FmpClient
 			$httpQuery ? '?' . $httpQuery : '',
 		);
 
-		return new RequestArguments($this->client, 'GET', $url);
+		return $this->client->request('GET', $url);
 	}
 
 	/**
@@ -446,13 +416,11 @@ final class FmpClient
 	 */
 	private function requestObjects(
 		string $className,
-		RequestArguments $arguments,
+		ResponseInterface $response,
 		?callable $getter = null,
 	): ChildrenResponse
 	{
-		$this->applyRepeatable($response = new ObjectsResponse($className, $this->decoder, $arguments, $getter));
-
-		return $response;
+		return new ObjectsResponse($className, $this->decoder, $response, $getter);
 	}
 
 	/**
@@ -462,10 +430,9 @@ final class FmpClient
 	 * @param (callable(mixed[]): mixed[])|null $callback
 	 * @return ChildResponse<T>
 	 */
-	private function requestObject(string $className, RequestArguments $arguments, array $options = [], bool $itemAsArray = false, ?callable $callback = null): ChildResponse
+	private function requestObject(string $className, ResponseInterface $response, array $options = [], bool $itemAsArray = false, ?callable $callback = null): ChildResponse
 	{
 		$options['metadata'] = [
-			'safeLink' => fn () => str_replace($this->apiKey, 'secret', $arguments->url),
 			'callback' => $callback,
 		];
 
@@ -473,14 +440,7 @@ final class FmpClient
 			$options['metadata']['itemAsArray'] = true;
 		}
 
-		$this->applyRepeatable($response = new ObjectResponse($className, $this->decoder, $arguments, $options));
-
-		return $response;
-	}
-
-	private function applyRepeatable(Response $response): void
-	{
-		$response->repeatable(2, fn (ResponseInterface $response) => $response->getStatusCode() === 429);
+		return new ObjectResponse($className, $this->decoder, $response, $options);
 	}
 
 }
