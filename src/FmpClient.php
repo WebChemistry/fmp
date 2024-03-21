@@ -337,6 +337,20 @@ final class FmpClient
 	/**
 	 * @template T of FmpResult
 	 * @param class-string<T> $className
+	 * @param callable(FmpClient $client): iterable<ChildrenResponse<T>> $factory
+	 * @return MergedObjectsResponse<T>
+	 */
+	public function requestMultiple(string $className, callable $factory): MergedObjectsResponse
+	{
+		$responses = $factory($this);
+		$responses = is_array($responses) ? $responses : iterator_to_array($responses);
+
+		return new MergedObjectsResponse($className, $responses);
+	}
+
+	/**
+	 * @template T of FmpResult
+	 * @param class-string<T> $className
 	 * @param ChildrenResponse<T>[] $responses
 	 * @return MergedObjectsResponse<T>
 	 */
