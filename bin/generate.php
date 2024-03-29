@@ -269,10 +269,10 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('image', 'string', ArrayTypeAssert::string(...))
 		->addProperty('ipoDate', 'string', ArrayTypeAssert::string(...), emptyIsNull: true)
 		->addProperty('defaultImage', 'string', ArrayTypeAssert::string(...))
-		->addProperty('isEtf', 'string', ArrayTypeAssert::string(...))
-		->addProperty('isActivelyTrading', 'string', ArrayTypeAssert::string(...))
-		->addProperty('isFund', 'string', ArrayTypeAssert::string(...))
-		->addProperty('isAdr', 'string', ArrayTypeAssert::string(...)),
+		->addProperty('isEtf', ...csvBoolean())
+		->addProperty('isActivelyTrading', ...csvBoolean())
+		->addProperty('isFund', ...csvBoolean())
+		->addProperty('isAdr', ...csvBoolean()),
 	(new Configuration('IncomeStatement', messageWithSymbol: true, containsSymbol: true))
 		->addProperty('date', 'string', ArrayTypeAssert::string(...), fieldName: 'date')
 		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
@@ -408,6 +408,15 @@ $generator->generate();
 function enumConverter(string $enumClass): string
 {
 	return sprintf('$value = %s::from($value);', $enumClass);
+}
+
+function csvBoolean(): array
+{
+	return [
+		'bool',
+		ArrayTypeAssert::string(...),
+		'converter' => '$value = strcasecmp($value, "true") === 0;',
+	];
 }
 
 function dateTimeField(bool $nullable = false): array

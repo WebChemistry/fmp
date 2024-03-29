@@ -394,27 +394,43 @@ final class Profile extends FmpResult implements SymbolResult
 	}
 
 
-	public function getIsEtf(): string
+	public function getIsEtf(): bool
 	{
-		return ArrayTypeAssert::string($this->data, 'isEtf', fn (): string => sprintf('%s of %s', 'isEtf', $this->getSymbol()));
+		$value = ArrayTypeAssert::string($this->data, 'isEtf', fn (): string => sprintf('%s of %s', 'isEtf', $this->getSymbol()));
+
+		$value = strcasecmp($value, "true") === 0;
+
+		return $value;
 	}
 
 
-	public function getIsActivelyTrading(): string
+	public function getIsActivelyTrading(): bool
 	{
-		return ArrayTypeAssert::string($this->data, 'isActivelyTrading', fn (): string => sprintf('%s of %s', 'isActivelyTrading', $this->getSymbol()));
+		$value = ArrayTypeAssert::string($this->data, 'isActivelyTrading', fn (): string => sprintf('%s of %s', 'isActivelyTrading', $this->getSymbol()));
+
+		$value = strcasecmp($value, "true") === 0;
+
+		return $value;
 	}
 
 
-	public function getIsFund(): string
+	public function getIsFund(): bool
 	{
-		return ArrayTypeAssert::string($this->data, 'isFund', fn (): string => sprintf('%s of %s', 'isFund', $this->getSymbol()));
+		$value = ArrayTypeAssert::string($this->data, 'isFund', fn (): string => sprintf('%s of %s', 'isFund', $this->getSymbol()));
+
+		$value = strcasecmp($value, "true") === 0;
+
+		return $value;
 	}
 
 
-	public function getIsAdr(): string
+	public function getIsAdr(): bool
 	{
-		return ArrayTypeAssert::string($this->data, 'isAdr', fn (): string => sprintf('%s of %s', 'isAdr', $this->getSymbol()));
+		$value = ArrayTypeAssert::string($this->data, 'isAdr', fn (): string => sprintf('%s of %s', 'isAdr', $this->getSymbol()));
+
+		$value = strcasecmp($value, "true") === 0;
+
+		return $value;
 	}
 
 
