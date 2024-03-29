@@ -39,7 +39,7 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('priceAvg50', 'int|float|null', ArrayTypeAssert::intOrFloatOrNull(...), zeroIsNull: true)
 		->addProperty('priceAvg200', 'int|float|null', ArrayTypeAssert::intOrFloatOrNull(...), zeroIsNull: true)
 		->addProperty('open', 'int|float|null', ArrayTypeAssert::intOrFloatOrNull(...), zeroIsNull: true)
-		->addProperty('name', 'string|null', ArrayTypeAssert::stringOrNull(...))
+		->addProperty('name', 'string|null', ArrayTypeAssert::stringOrNull(...), mayNotExist: true)
 		->addProperty('exchange', 'string|null', ArrayTypeAssert::stringOrNull(...), mayNotExist: true)
 		->addProperty('changesPercentage', 'int|float|null', ArrayTypeAssert::intOrFloatOrNull(...), fieldName: 'percentageChange')
 		->addProperty('sharesOutstanding', 'int|null', ArrayTypeAssert::integerishOrNull(...), zeroIsNull: true)

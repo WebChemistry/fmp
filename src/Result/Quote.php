@@ -204,6 +204,10 @@ final class Quote extends FmpResult implements SymbolResult
 
 	public function getName(): string|null
 	{
+		if (!isset($this->data['name'])) {
+			return null;
+		}
+
 		return ArrayTypeAssert::stringOrNull($this->data, 'name', fn (): string => sprintf('%s of %s', 'name', $this->getSymbol()));
 	}
 
