@@ -277,7 +277,7 @@ $generator = new \WebChemistry\FmpGenerator\Generator([
 		->addProperty('date', 'string', ArrayTypeAssert::string(...), fieldName: 'date')
 		->addProperty('symbol', 'string', ArrayTypeAssert::string(...), fieldName: 'symbol')
 		->addProperty('reportedCurrency', 'string', ArrayTypeAssert::string(...), fieldName: 'reportedCurrency')
-		->addProperty('cik', 'int', ArrayTypeAssert::integerish(...), fieldName: 'cik')
+		->addProperty('cik', 'int', ArrayTypeAssert::integerish(...), emptyIsNull: true, fieldName: 'cik')
 		->addProperty('fillingDate', 'string', ArrayTypeAssert::string(...), fieldName: 'fillingDate')
 		->addProperty('acceptedDate', 'string', ArrayTypeAssert::string(...), emptyIsNull: true, fieldName: 'acceptedDate')
 		->addProperty('calendarYear', 'int', ArrayTypeAssert::integerish(...), fieldName: 'calendarYear')

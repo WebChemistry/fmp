@@ -67,8 +67,12 @@ final class IncomeStatement extends FmpResult implements SymbolResult
 	}
 
 
-	public function getCik(): int
+	public function getCik(): int|null
 	{
+		if (($this->data['cik'] ?? null) === '') {
+			return null;
+		}
+
 		return ArrayTypeAssert::integerish($this->data, 'cik', fn (): string => sprintf('%s of %s', 'cik', $this->getSymbol()));
 	}
 
