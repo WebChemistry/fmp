@@ -359,6 +359,17 @@ final class FmpClient
 		return new MergedObjectsResponse($className, $responses);
 	}
 
+	public function requestRaw(string $query, string $version): ResponseInterface
+	{
+		if (str_contains($query, '?')) {
+			$query .= '&apikey=' . $this->apiKey;
+		} else {
+			$query .= '?apikey=' . $this->apiKey;
+		}
+
+		return $this->client->request('GET', sprintf('https://financialmodelingprep.com/api/%s/%s', $version, $query));
+	}
+
 	/**
 	 * @param string[]|string $path
 	 * @param non-empty-array<string> $symbols
