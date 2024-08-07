@@ -77,6 +77,16 @@ final class FmpClient
 		return $clone;
 	}
 
+	public function withBulkRetryStrategy(int $maxRetries = 3): self
+	{
+		$clone = clone $this;
+		$clone->client = new RetryableHttpClient($clone->client, new GenericRetryStrategy([
+			423, 425, 429,
+		], 10_000, 1), $maxRetries);
+
+		return $clone;
+	}
+
 	/**
 	 * @param string[] $contentTypes
 	 * @return static
