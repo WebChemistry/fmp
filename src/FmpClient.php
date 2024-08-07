@@ -359,7 +359,7 @@ final class FmpClient
 		return new MergedObjectsResponse($className, $responses);
 	}
 
-	public function requestRaw(string $query, string $version): ResponseInterface
+	public function requestRaw(string $query, string $version = 'v3'): ResponseInterface
 	{
 		if (str_contains($query, '?')) {
 			$query .= '&apikey=' . $this->apiKey;
